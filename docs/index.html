@@ -129,10 +129,12 @@
             <span class="metric-label">Training examples or learned compression policy</span>
           </div>
         </div>
-        <div class="figure-grid results-figures">
-          <img class="figure-image small" src="./assets/main_results.png" alt="Main benchmark results" />
-          <img class="figure-image small" src="./assets/ablation.png" alt="Ablation results showing dashboard contribution" />
-          <img class="figure-image small" src="./assets/pressure_curve.png" alt="Context pressure curve" />
+        <div class="results-figures">
+          <div class="results-figure-stack">
+            <img class="figure-image small" src="./assets/ablation.png" alt="Ablation results showing dashboard contribution" />
+            <img class="figure-image small" src="./assets/pressure_curve.png" alt="Context pressure curve" />
+          </div>
+          <img class="figure-image main-result-figure" src="./assets/main_results.png" alt="Main benchmark results" />
         </div>
 
         <div id="tables" class="table-section">
@@ -179,35 +181,6 @@
             </table>
           </div>
 
-          <div class="table-heading second-table">
-            <div>
-              <div class="section-kicker">Component Ablation</div>
-              <h3>LOCA-Bench sensitivity to archive, dashboard, and recovery controls.</h3>
-            </div>
-          </div>
-          <div class="table-wrap compact-table">
-            <table class="result-table">
-              <thead>
-                <tr>
-                  <th scope="col">Variant</th>
-                  <th scope="col">Correct / 75</th>
-                  <th scope="col">Acc.</th>
-                  <th scope="col">Timeout</th>
-                  <th scope="col">Archive</th>
-                  <th scope="col">Recover / read</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="ours"><th scope="row">VISTA full</th><td>38</td><td class="best">50.7</td><td>20</td><td>69</td><td>105</td></tr>
-                <tr><th scope="row">w/o archive</th><td>27</td><td>36.0</td><td>41</td><td>0</td><td>4</td></tr>
-                <tr><th scope="row">w/o dashboard</th><td>28</td><td>37.3</td><td>5</td><td>255</td><td>57</td></tr>
-                <tr><th scope="row">w/o explicit recover</th><td>34</td><td>45.3</td><td>22</td><td>262</td><td>57</td></tr>
-                <tr><th scope="row">Fixed archive policy</th><td>33</td><td>44.0</td><td>12</td><td>-</td><td>162</td></tr>
-                <tr><th scope="row">Archive wording ablation</th><td>37</td><td>49.3</td><td>15</td><td>842</td><td>125</td></tr>
-                <tr><th scope="row">State-board variant</th><td>36</td><td>48.0</td><td>18</td><td>238</td><td>56</td></tr>
-              </tbody>
-            </table>
-          </div>
         </div>
       </section>
 
