@@ -121,6 +121,12 @@ h1 {
   font-size: 68px;
   line-height: 1.02;
   letter-spacing: 0;
+  overflow-wrap: break-word;
+}
+
+h1 span {
+  display: inline;
+  white-space: normal;
 }
 
 h2 {
@@ -147,6 +153,7 @@ h3 {
   color: var(--muted);
   font-size: 15px;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .paper-title span {
@@ -171,6 +178,7 @@ h3 {
   margin: 0;
   font-size: 14px;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .author-notes {
@@ -519,10 +527,31 @@ h3 {
     grid-template-columns: 1fr;
     min-height: auto;
     padding: 50px 22px 42px;
+    overflow: hidden;
+  }
+
+  .hero-copy,
+  .hero-visual,
+  .subtitle,
+  .paper-title,
+  .authors,
+  .affiliations,
+  .author-notes {
+    width: 100%;
+    max-width: 22rem;
   }
 
   h1 {
-    font-size: 42px;
+    font-size: 38px;
+    line-height: 1.06;
+    width: 100%;
+    max-width: 9.4em;
+    overflow-wrap: anywhere;
+  }
+
+  h1 span {
+    display: block;
+    max-width: 100%;
   }
 
   .subtitle,
@@ -561,10 +590,31 @@ h3 {
   }
 
   .dashboard-shell {
+    max-width: 100%;
     padding: 14px;
+    overflow: hidden;
   }
 
   .dash-head {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-copy,
+  .hero-visual,
+  .subtitle,
+  .paper-title,
+  .authors,
+  .affiliations,
+  .author-notes {
+    width: calc(100vw - 44px);
+    max-width: 346px;
+  }
+
+  h1 {
+    width: calc(100vw - 44px);
+    max-width: 346px;
+    font-size: 36px;
   }
 }
