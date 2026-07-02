@@ -70,7 +70,9 @@
       </section>
 
       <section class="image-section">
-        <img src="./assets/teaser.png" alt="VISTA teaser showing self-managed context behavior" />
+        <object class="pdf-figure large" data="./assets/teaser.pdf" type="application/pdf">
+          <a href="./assets/teaser.pdf">Open VISTA teaser PDF</a>
+        </object>
       </section>
 
       <section id="method" class="content-section">
@@ -92,17 +94,27 @@
         </div>
       </section>
 
+      <section class="content-section overview-section">
+        <div class="section-kicker">Methodology Overview</div>
+        <h2>VISTA turns an opaque transcript into a managed workspace.</h2>
+        <object class="pdf-figure large" data="./assets/system_overview.pdf" type="application/pdf">
+          <a href="./assets/system_overview.pdf">Open methodology overview PDF</a>
+        </object>
+      </section>
+
       <section class="content-section split-section">
         <div>
-          <div class="section-kicker">Mechanism</div>
-          <h2>Visible workspace, hidden archive, explicit recall.</h2>
+          <div class="section-kicker">Case Study Trace</div>
+          <h2>VISTA archives large evidence and recovers payloads when needed.</h2>
           <p>
-            VISTA does not train a compression policy. It gives a capable model a lightweight control
-            surface for deciding what should stay visible, what should be archived, and what should be
-            recalled later.
+            In one 128K LOCA-Bench run, VISTA keeps the live context compact relative to a
+            no-archive counterfactual, archives large evidence, and recovers payloads when the
+            agent needs them.
           </p>
         </div>
-        <img src="./assets/mechanism.png" alt="VISTA mechanism overview" />
+        <object class="pdf-figure medium" data="./assets/case_study_trace.pdf" type="application/pdf">
+          <a href="./assets/case_study_trace.pdf">Open case study trace PDF</a>
+        </object>
       </section>
 
       <section id="results" class="content-section results-section">
@@ -123,10 +135,18 @@
           </div>
         </div>
         <div class="figure-grid">
-          <img src="./assets/main_results.png" alt="Main benchmark results" />
-          <img src="./assets/ablation.png" alt="Ablation results showing dashboard contribution" />
-          <img src="./assets/pressure_curve.png" alt="Context pressure curve" />
-          <img src="./assets/case_study_trace.png" alt="Case study trace" />
+          <object class="pdf-figure small" data="./assets/main_results.pdf" type="application/pdf">
+            <a href="./assets/main_results.pdf">Open main results PDF</a>
+          </object>
+          <object class="pdf-figure small" data="./assets/ablation.pdf" type="application/pdf">
+            <a href="./assets/ablation.pdf">Open ablation PDF</a>
+          </object>
+          <object class="pdf-figure small" data="./assets/pressure_curve.pdf" type="application/pdf">
+            <a href="./assets/pressure_curve.pdf">Open pressure curve PDF</a>
+          </object>
+          <object class="pdf-figure small" data="./assets/system_overview.pdf" type="application/pdf">
+            <a href="./assets/system_overview.pdf">Open methodology overview PDF</a>
+          </object>
         </div>
       </section>
 

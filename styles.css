@@ -268,13 +268,36 @@ h3 {
 
 .image-section img,
 .split-section img,
-.figure-grid img {
+.figure-grid img,
+.pdf-figure {
   display: block;
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fff;
   box-shadow: var(--shadow);
+}
+
+.pdf-figure {
+  overflow: hidden;
+}
+
+.pdf-figure.large {
+  height: min(72vw, 780px);
+  min-height: 520px;
+}
+
+.pdf-figure.medium {
+  height: min(46vw, 540px);
+  min-height: 360px;
+}
+
+.pdf-figure.small {
+  height: 390px;
+}
+
+.overview-section .pdf-figure {
+  margin-top: 24px;
 }
 
 .feature-grid {
@@ -395,6 +418,13 @@ h3 {
   .figure-grid,
   .split-section {
     grid-template-columns: 1fr;
+  }
+
+  .pdf-figure.large,
+  .pdf-figure.medium,
+  .pdf-figure.small {
+    height: 420px;
+    min-height: 360px;
   }
 
   .context-block {
