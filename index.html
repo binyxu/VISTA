@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VISTA | Self-Managed Context for LLM Agents</title>
+    <meta
+      name="description"
+      content="VISTA exposes a proprioceptive dashboard that lets long-horizon LLM agents manage their own context."
+    />
+    <meta property="og:title" content="VISTA: Self-Managed Context for LLM Agents" />
+    <meta
+      property="og:description"
+      content="LLM Agents Are Latent Context Managers: Eliciting Self-Managed Context via a Proprioceptive Dashboard."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="VISTA home">
+        <span class="brand-mark">V</span>
+        <span>VISTA</span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="#abstract">Abstract</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#code">Code</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section-band">
+        <div class="hero-copy">
+          <p class="venue">arXiv 2026</p>
+          <h1>LLM Agents Are Latent Context Managers</h1>
+          <p class="subtitle">Eliciting self-managed context via a proprioceptive dashboard.</p>
+          <p class="authors">Binyan Xu · Haitao Li · Kehuan Zhang</p>
+          <div class="button-row" aria-label="Paper links">
+            <a class="button primary" href="https://arxiv.org/abs/2606.30005">Paper</a>
+            <a class="button" href="https://github.com/binyxu/VISTA">Code</a>
+            <a class="button" href="https://github.com/binyxu/VISTA/blob/main/DATA.md">Data</a>
+            <a class="button" href="#citation">BibTeX</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Animated context dashboard preview">
+          <div class="dashboard-shell">
+            <div class="dash-head">
+              <span>context dashboard</span>
+              <span id="pressure-label">pressure 72%</span>
+            </div>
+            <div class="pressure-track">
+              <div class="pressure-fill" id="pressure-fill"></div>
+            </div>
+            <div class="block-stack" id="block-stack"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="abstract" class="content-section">
+        <div class="section-kicker">Abstract</div>
+        <p class="abstract-text">
+          Long-horizon tool agents are bottlenecked by how their context grows toward the limits of
+          the context window. VISTA represents working memory as typed, addressable blocks, surfaces
+          runtime state through a dashboard, and archives blocks as recoverable full-fidelity
+          payloads. The same untrained interface transfers across LOCA-Bench, BrowseComp-Plus, and
+          GAIA.
+        </p>
+      </section>
+
+      <section class="image-section">
+        <img src="./assets/teaser.png" alt="VISTA teaser showing self-managed context behavior" />
+      </section>
+
+      <section id="method" class="content-section">
+        <div class="section-kicker">Key Idea</div>
+        <h2>Give the agent visibility into its own context state.</h2>
+        <div class="feature-grid">
+          <article>
+            <h3>Typed Blocks</h3>
+            <p>Conversation, tool calls, file reads, and derived state become addressable workspace blocks.</p>
+          </article>
+          <article>
+            <h3>Proprioceptive Dashboard</h3>
+            <p>The model sees token usage, recency, access history, and context pressure before acting.</p>
+          </article>
+          <article>
+            <h3>Recoverable Archive</h3>
+            <p>Archived blocks are moved out of the active window without destroying full-fidelity evidence.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section split-section">
+        <div>
+          <div class="section-kicker">Mechanism</div>
+          <h2>Visible workspace, hidden archive, explicit recall.</h2>
+          <p>
+            VISTA does not train a compression policy. It gives a capable model a lightweight control
+            surface for deciding what should stay visible, what should be archived, and what should be
+            recalled later.
+          </p>
+        </div>
+        <img src="./assets/mechanism.png" alt="VISTA mechanism overview" />
+      </section>
+
+      <section id="results" class="content-section results-section">
+        <div class="section-kicker">Results</div>
+        <h2>Training-free gains under context pressure.</h2>
+        <div class="metric-row">
+          <div class="metric">
+            <span class="metric-value">22.7 → 50.7%</span>
+            <span class="metric-label">Gemini-3-Flash on LOCA-Bench</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">3</span>
+            <span class="metric-label">Benchmarks: LOCA-Bench, BrowseComp-Plus, GAIA</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">0</span>
+            <span class="metric-label">Training examples or learned compression policy</span>
+          </div>
+        </div>
+        <div class="figure-grid">
+          <img src="./assets/main_results.png" alt="Main benchmark results" />
+          <img src="./assets/ablation.png" alt="Ablation results showing dashboard contribution" />
+          <img src="./assets/pressure_curve.png" alt="Context pressure curve" />
+          <img src="./assets/case_study_trace.png" alt="Case study trace" />
+        </div>
+      </section>
+
+      <section id="code" class="content-section code-section">
+        <div class="section-kicker">Run</div>
+        <h2>Download data, add an API key, and run.</h2>
+        <pre><code>git clone git@github.com:binyxu/VISTA.git
+cd VISTA
+cp .env.example .env
+# edit .env with LOCA_OPENAI_API_KEY and LOCA_OPENAI_BASE_URL
+bash run_loca_self_managed.sh</code></pre>
+        <div class="button-row">
+          <a class="button primary" href="https://github.com/binyxu/VISTA">GitHub Repository</a>
+          <a class="button" href="https://github.com/binyxu/VISTA/blob/main/DATA.md">Dataset Instructions</a>
+        </div>
+      </section>
+
+      <section id="citation" class="content-section citation-section">
+        <div class="section-kicker">Citation</div>
+        <pre><code>@article{xu2026vista,
+  title   = {LLM Agents Are Latent Context Managers: Eliciting Self-Managed Context via a Proprioceptive Dashboard},
+  author  = {Xu, Binyan and Li, Haitao and Zhang, Kehuan},
+  journal = {arXiv preprint arXiv:2606.30005},
+  year    = {2026}
+}</code></pre>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>VISTA</span>
+      <span>Self-managed context for long-horizon tool agents.</span>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
