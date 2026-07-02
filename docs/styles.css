@@ -142,8 +142,33 @@ h3 {
 }
 
 .authors {
+  margin: 0;
   color: var(--muted);
   font-weight: 650;
+}
+
+.authors sup,
+.affiliations sup {
+  font-size: 0.62em;
+  line-height: 0;
+}
+
+.affiliations,
+.author-notes,
+.author-emails {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.author-notes {
+  color: #64746e;
+}
+
+.author-emails {
+  color: #53635d;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  overflow-wrap: anywhere;
 }
 
 .button-row {
@@ -355,7 +380,7 @@ h3 {
 }
 
 .results-figures {
-  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.55fr);
+  grid-template-columns: minmax(0, 0.55fr) minmax(0, 0.45fr);
   align-items: stretch;
 }
 
