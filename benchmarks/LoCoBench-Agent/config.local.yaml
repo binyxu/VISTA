@@ -1,0 +1,4 @@
+data:
+  output_dir: /Users/binyanxu/Documents/project/self_managed_context_iclr/external/LoCoBench-Agent/data/output
+  generated_dir: /Users/binyanxu/Documents/project/self_managed_context_iclr/external/LoCoBench-Agent/data/generated
+api: {}

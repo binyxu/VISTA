@@ -1,0 +1,56 @@
+{
+  "configurations": [
+    {
+      "name": "CourseAssistantS2LEnv",
+      "env_class": "gem.envs.course_assistant_s2l.course_assistant_s2l.CourseAssistantS2LEnv",
+      "env_params": {
+        "num_students": 350,
+        "dropout_rate": 0.2,
+        "submission_rate": 0.7,
+        "seed": 42
+      },
+      "mcp_servers": {
+        "excel": {
+          "enabled": true,
+          "type": "excel",
+          "params": {
+            "excel_files_path": "{agent_workspace}"
+          }
+        },
+        "email": {
+          "enabled": true,
+          "type": "email",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/emails"
+          }
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        },
+        "terminal": {
+          "enabled": true,
+          "type": "terminal",
+          "params": {
+            "agent_workspace": "{agent_workspace}"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "enabled": true,
+          "type": "claim_done",
+          "params": {}
+        }
+      }
+    }
+  ]
+}

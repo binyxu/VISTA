@@ -1,0 +1,25 @@
+{
+  "num_courses": 75,
+  "num_enrolled_courses": 75,
+  "num_exams": 74,
+  "canvas_exams": 64,
+  "email_exams": 10,
+  "tbd_exams": 0,
+  "past_exams": 0,
+  "exempted_courses": 0,
+  "no_exam_courses": 1,
+  "reference_date": "2025-01-15",
+  "difficulty": "medium",
+  "seed": 42,
+  "parameters": {
+    "num_courses": 75,
+    "canvas_exam_rate": 0.8,
+    "email_exam_rate": 0.2,
+    "no_exam_rate": 0.1,
+    "tbd_rate": 0.0,
+    "exemption_rate": 0.0,
+    "past_exam_rate": 0.0,
+    "distraction_emails": 3,
+    "distraction_announcements": 2
+  }
+}

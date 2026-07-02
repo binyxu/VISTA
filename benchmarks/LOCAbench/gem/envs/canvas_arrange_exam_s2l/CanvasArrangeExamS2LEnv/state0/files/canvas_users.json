@@ -1,0 +1,37 @@
+{
+  "students": [
+    {
+      "id": "rkelly27",
+      "name": "Ronald Kelly",
+      "email": "rkelly27@mcp.com",
+      "password": "ronald_81q2O"
+    }
+  ],
+  "teachers": [
+    {
+      "name": "Steven Hernandez",
+      "email": "steven.hernandez@mcp.com",
+      "password": "teacher_pass"
+    },
+    {
+      "name": "Debra Flores",
+      "email": "debra_flores76@mcp.com",
+      "password": "teacher_pass"
+    },
+    {
+      "name": "Christopher Miller",
+      "email": "christopher.miller@mcp.com",
+      "password": "teacher_pass"
+    },
+    {
+      "name": "Smith Johnson",
+      "email": "smith.johnson@mcp.com",
+      "password": "teacher_pass"
+    },
+    {
+      "name": "Emily Davis",
+      "email": "emily.davis@mcp.com",
+      "password": "teacher_pass"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "1": {
+    "id": 1,
+    "name": "Jennifer Martinez",
+    "short_name": "Jennifer",
+    "sortable_name": "Martinez, Jennifer",
+    "login_id": "admin",
+    "password": "admin123",
+    "primary_email": "jennifer.martinez@canvas.edu",
+    "time_zone": "America/Denver",
+    "created_at": "2026-05-18T02:15:37.233286+00:00",
+    "updated_at": "2026-05-18T02:15:37.233286+00:00"
+  },
+  "2": {
+    "id": 2,
+    "name": "Dr. Robert Chen",
+    "short_name": "Robert",
+    "sortable_name": "Chen, Robert",
+    "login_id": "robert.chen",
+    "password": "teacher123",
+    "primary_email": "robert.chen@canvas.edu",
+    "time_zone": "America/Denver",
+    "created_at": "2026-05-18T02:15:37.233286+00:00",
+    "updated_at": "2026-05-18T02:15:37.233286+00:00"
+  },
+  "3": {
+    "id": 3,
+    "name": "Prof. Sarah Johnson",
+    "short_name": "Sarah",
+    "sortable_name": "Johnson, Sarah",
+    "login_id": "sarah.johnson",
+    "password": "teacher123",
+    "primary_email": "sarah.johnson@canvas.edu",
+    "time_zone": "America/New_York",
+    "created_at": "2026-05-18T02:15:37.233286+00:00",
+    "updated_at": "2026-05-18T02:15:37.233286+00:00"
+  },
+  "4": {
+    "id": 4,
+    "name": "Michael Thompson",
+    "short_name": "Michael",
+    "sortable_name": "Thompson, Michael",
+    "login_id": "michael.thompson",
+    "password": "student123",
+    "primary_email": "michael.thompson@student.canvas.edu",
+    "time_zone": "America/Denver",
+    "created_at": "2026-05-18T02:15:37.233286+00:00",
+    "updated_at": "2026-05-18T02:15:37.233286+00:00"
+  },
+  "5": {
+    "id": 5,
+    "name": "Emily Rodriguez",
+    "short_name": "Emily",
+    "sortable_name": "Rodriguez, Emily",
+    "login_id": "emily.rodriguez",
+    "password": "student123",
+    "primary_email": "emily.rodriguez@student.canvas.edu",
+    "time_zone": "America/Chicago",
+    "created_at": "2026-05-18T02:15:37.233286+00:00",
+    "updated_at": "2026-05-18T02:15:37.233286+00:00"
+  },
+  "6": {
+    "id": 6,
+    "name": "James Wilson",
+    "short_name": "James",
+    "sortable_name": "Wilson, James",
+    "login_id": "james.wilson",
+    "password": "student123",
+    "primary_email": "james.wilson@student.canvas.edu",
+    "time_zone": "America/Los_Angeles",
+    "created_at": "2026-05-18T02:15:37.233286+00:00",
+    "updated_at": "2026-05-18T02:15:37.233286+00:00"
+  },
+  "7": {
+    "id": 7,
+    "name": "Sophia Patel",
+    "short_name": "Sophia",
+    "sortable_name": "Patel, Sophia",
+    "login_id": "sophia.patel",
+    "password": "student123",
+    "primary_email": "sophia.patel@student.canvas.edu",
+    "time_zone": "America/New_York",
+    "created_at": "2026-05-18T02:15:37.233286+00:00",
+    "updated_at": "2026-05-18T02:15:37.233286+00:00"
+  },
+  "8": {
+    "id": 8,
+    "name": "Daniel Kim",
+    "short_name": "Daniel",
+    "sortable_name": "Kim, Daniel",
+    "login_id": "daniel.kim",
+    "password": "student123",
+    "primary_email": "daniel.kim@student.canvas.edu",
+    "time_zone": "America/Denver",
+    "created_at": "2026-05-18T02:15:37.233286+00:00",
+    "updated_at": "2026-05-18T02:15:37.233286+00:00"
+  }
+}

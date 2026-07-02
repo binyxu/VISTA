@@ -1,0 +1,43 @@
+{
+  "configurations": [
+    {
+      "env_class": "gem.envs.academic_warning_s2l.academic_warning_s2l.AcademicWarningS2LEnv",
+      "env_params": {
+        "num_students": 360,
+        "num_exams": 12,
+        "difficulty": "medium",
+        "seed": 42,
+        "verbose": false
+      },
+      "mcp_servers": {
+        "google_cloud": {
+          "type": "google_cloud",
+          "enabled": true,
+          "params": {
+            "data_dir": "{task_workspace}/local_db/google_cloud"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "type": "claim_done",
+          "enabled": true,
+          "params": {}
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        }
+      },
+      "name": "AcademicWarningS2LEnv"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "configurations": [
+    {
+      "name": "CanvasListTestS2LEnv",
+      "env_class": "gem.envs.canvas_list_test_s2l.canvas_list_test_s2l.CanvasListTestS2LEnv",
+      "env_params": {
+        "seed": 42,
+        "num_courses": 70,
+        "submission_prob": 0.3,
+        "exemption_prob": 0.1,
+        "exemption_meet_prob": 0.5
+      },
+      "mcp_servers": {
+        "canvas": {
+          "enabled": true,
+          "type": "canvas",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/canvas",
+            "login_id": "ryan.brown93@mcp.com",
+            "password": "BryapivvLK7C"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "enabled": true,
+          "type": "claim_done",
+          "params": {}
+        },
+        "memory": {
+          "enabled": true,
+          "type": "memory",
+          "params": {
+            "memory_file_path": "{agent_workspace}/memory/memory.json"
+          }
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        }
+      }
+    },
+    {
+      "env_class": "gem.envs.ab_testing_s2l.ab_testing_s2l.ABTestingS2LEnv",
+      "env_params": {
+        "num_scenarios": 2000,
+        "num_days": 365,
+        "seed": 42
+      },
+      "mcp_servers": {
+        "google_cloud": {
+          "type": "google_cloud",
+          "enabled": true,
+          "params": {
+            "data_dir": "{task_workspace}/local_db/google_cloud"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "type": "claim_done",
+          "enabled": true,
+          "params": {}
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        }
+      },
+      "name": "ABTestingS2LEnv"
+    }
+  ]
+}

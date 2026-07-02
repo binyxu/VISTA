@@ -1,0 +1,62 @@
+{
+  "id": "context-workspace",
+  "name": "Context Workspace Engine",
+  "description": "Agent-managed context for long-horizon tasks: HIDE, ABSTRACT, RECALL actions with living state and archive.",
+  "activation": {
+    "onStartup": true
+  },
+  "contracts": {
+    "tools": [
+      "context_workspace_hide",
+      "context_workspace_abstract",
+      "context_workspace_recall",
+      "context_workspace_show_block"
+    ]
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "mode": {
+        "type": "string",
+        "enum": ["workspace", "legacy"],
+        "default": "workspace"
+      },
+      "tokenBudget": {
+        "type": "integer",
+        "minimum": 4000,
+        "maximum": 200000,
+        "default": 32000
+      },
+      "dashboardTopK": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 20,
+        "default": 6
+      },
+      "summarizerModel": {
+        "type": ["string", "null"],
+        "default": null,
+        "description": "Model ref for LLM episode summarization, e.g. 'anthropic/claude-haiku-4-5-20251001'. null = rule-based only."
+      }
+    }
+  },
+  "uiHints": {
+    "mode": {
+      "label": "Context Engine Mode",
+      "help": "workspace: use ContextWorkspace with HIDE/ABSTRACT/RECALL tools. legacy: delegate to OpenClaw default engine (baseline comparison)."
+    },
+    "tokenBudget": {
+      "label": "Token Budget",
+      "help": "Maximum tokens for visible context. Blocks are auto-hidden when this is exceeded."
+    },
+    "dashboardTopK": {
+      "label": "Dashboard Top-K",
+      "help": "Number of largest blocks shown in the mini dashboard."
+    },
+    "summarizerModel": {
+      "label": "Episode Summarizer Model",
+      "help": "Model for LLM episode summaries. Format: 'provider/modelId' (e.g. 'anthropic/claude-haiku-4-5-20251001'). Leave empty to use rule-based summaries only."
+    }
+  }
+}

@@ -1,0 +1,2654 @@
+{
+  "courses": [
+    {
+      "name": "Coordination Chemistry-1",
+      "course_code": "CHEM206-1",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-01-25 18:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 147",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - CHEM206",
+          "content": "Dear CHEM206 students,\n\nThis is to announce that the final exam for Coordination Chemistry will be held on:\n\n📅 Date: January 25, 2025\n⏰ Time: 18:00 - 20:30\n⏱️ Duration: 150 minutes\n📍 Location: Main Building, Room 147\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 18",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reminder: Assignment 2 is due next week",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - CHEM206",
+        "content": "Dear CHEM206 students,\n\nThis is to announce that the final exam for Coordination Chemistry will be held on:\n\n📅 Date: January 25, 2025\n⏰ Time: 18:00 - 20:30\n⏱️ Duration: 150 minutes\n📍 Location: Main Building, Room 147\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Capstone Modeling-2",
+      "course_code": "ADV133-2",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-03-14 17:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Academic Building B, Room 106",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - ADV133",
+          "content": "Dear ADV133 students,\n\nThis is to announce that the final exam for Capstone Modeling will be held on:\n\n📅 Date: March 14, 2025\n⏰ Time: 17:00 - 18:30\n⏱️ Duration: 90 minutes\n📍 Location: Academic Building B, Room 106\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Office hours this week: Tuesday 2-4 PM",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - ADV133",
+        "content": "Dear ADV133 students,\n\nThis is to announce that the final exam for Capstone Modeling will be held on:\n\n📅 Date: March 14, 2025\n⏰ Time: 17:00 - 18:30\n⏱️ Duration: 90 minutes\n📍 Location: Academic Building B, Room 106\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Software Defined Networks-3",
+      "course_code": "NET302-3",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-01-29 13:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 144",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - NET302",
+          "content": "Dear NET302 students,\n\nThis is to announce that the final exam for Software Defined Networks will be held on:\n\n📅 Date: January 29, 2025\n⏰ Time: 13:00 - 16:00\n⏱️ Duration: 180 minutes\n📍 Location: Main Building, Room 144\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 18",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Office hours this week: Thursday 2-4 PM",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - NET302",
+        "content": "Dear NET302 students,\n\nThis is to announce that the final exam for Software Defined Networks will be held on:\n\n📅 Date: January 29, 2025\n⏰ Time: 13:00 - 16:00\n⏱️ Duration: 180 minutes\n📍 Location: Main Building, Room 144\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Project in Science-4",
+      "course_code": "INT207-4",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-03 13:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Business School, Room 120",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - INT207",
+          "content": "Dear INT207 students,\n\nThis is to announce that the final exam for Project in Science will be held on:\n\n📅 Date: March 03, 2025\n⏰ Time: 13:00 - 15:00\n⏱️ Duration: 120 minutes\n📍 Location: Business School, Room 120\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - INT207",
+        "content": "Dear INT207 students,\n\nThis is to announce that the final exam for Project in Science will be held on:\n\n📅 Date: March 03, 2025\n⏰ Time: 13:00 - 15:00\n⏱️ Duration: 120 minutes\n📍 Location: Business School, Room 120\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Personality Psychology-5",
+      "course_code": "PSY202-5",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-01-24 13:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 149",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - PSY202",
+          "content": "Dear PSY202 students,\n\nThis is to announce that the final exam for Personality Psychology will be held on:\n\n📅 Date: January 24, 2025\n⏰ Time: 13:00 - 15:30\n⏱️ Duration: 150 minutes\n📍 Location: Main Building, Room 149\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - PSY202",
+        "content": "Dear PSY202 students,\n\nThis is to announce that the final exam for Personality Psychology will be held on:\n\n📅 Date: January 24, 2025\n⏰ Time: 13:00 - 15:30\n⏱️ Duration: 150 minutes\n📍 Location: Main Building, Room 149\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Algebraic Number Theory-6",
+      "course_code": "MATH207-6",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 4,
+      "exam_type": "Open-book",
+      "exam_time": "2025-02-27 08:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Exam Center, Room 116",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - MATH207",
+          "content": "Dear MATH207 students,\n\nThis is to announce that the final exam for Algebraic Number Theory will be held on:\n\n📅 Date: February 27, 2025\n⏰ Time: 08:00 - 10:00\n⏱️ Duration: 120 minutes\n📍 Location: Exam Center, Room 116\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 18",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Williams will give a talk on machine learning",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - MATH207",
+        "content": "Dear MATH207 students,\n\nThis is to announce that the final exam for Algebraic Number Theory will be held on:\n\n📅 Date: February 27, 2025\n⏰ Time: 08:00 - 10:00\n⏱️ Duration: 120 minutes\n📍 Location: Exam Center, Room 116\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Business Intelligence-7",
+      "course_code": "IS401-7",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-04-02 19:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 144",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - IS401",
+          "content": "Dear IS401 students,\n\nThis is to announce that the final exam for Business Intelligence will be held on:\n\n📅 Date: April 02, 2025\n⏰ Time: 19:00 - 21:00\n⏱️ Duration: 120 minutes\n📍 Location: Main Building, Room 144\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reminder: Assignment 5 is due next week",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - IS401",
+        "content": "Dear IS401 students,\n\nThis is to announce that the final exam for Business Intelligence will be held on:\n\n📅 Date: April 02, 2025\n⏰ Time: 19:00 - 21:00\n⏱️ Duration: 120 minutes\n📍 Location: Main Building, Room 144\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Survival Analysis-8",
+      "course_code": "MATH510-8",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 2,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-04-08 18:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Physics Building, Room 102",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - MATH510",
+          "content": "Dear MATH510 students,\n\nThis is to announce that the final exam for Survival Analysis will be held on:\n\n📅 Date: April 08, 2025\n⏰ Time: 18:00 - 19:30\n⏱️ Duration: 90 minutes\n📍 Location: Physics Building, Room 102\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reminder: Assignment 4 is due next week",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reminder: Assignment 5 is due next week",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - MATH510",
+        "content": "Dear MATH510 students,\n\nThis is to announce that the final exam for Survival Analysis will be held on:\n\n📅 Date: April 08, 2025\n⏰ Time: 18:00 - 19:30\n⏱️ Duration: 90 minutes\n📍 Location: Physics Building, Room 102\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Engineering Mechanics-9",
+      "course_code": "ME101-9",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-02-09 10:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Science Center, Room 121",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - ME101",
+          "content": "Dear ME101 students,\n\nThis is to announce that the final exam for Engineering Mechanics will be held on:\n\n📅 Date: February 09, 2025\n⏰ Time: 10:00 - 13:00\n⏱️ Duration: 180 minutes\n📍 Location: Science Center, Room 121\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 17",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reminder: Assignment 1 is due next week",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - ME101",
+        "content": "Dear ME101 students,\n\nThis is to announce that the final exam for Engineering Mechanics will be held on:\n\n📅 Date: February 09, 2025\n⏰ Time: 10:00 - 13:00\n⏱️ Duration: 180 minutes\n📍 Location: Science Center, Room 121\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Data Warehousing-10",
+      "course_code": "IS301-10",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-04-10 13:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Academic Building A, Room 104",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - IS301",
+          "content": "Dear IS301 students,\n\nThis is to announce that the final exam for Data Warehousing will be held on:\n\n📅 Date: April 10, 2025\n⏰ Time: 13:00 - 14:30\n⏱️ Duration: 90 minutes\n📍 Location: Academic Building A, Room 104\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Smith will give a talk on cloud computing",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - IS301",
+        "content": "Dear IS301 students,\n\nThis is to announce that the final exam for Data Warehousing will be held on:\n\n📅 Date: April 10, 2025\n⏰ Time: 13:00 - 14:30\n⏱️ Duration: 90 minutes\n📍 Location: Academic Building A, Room 104\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Seminar in Intelligence-11",
+      "course_code": "PRJ104-11",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 2,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-13 07:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Mathematics Building, Room 111",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - PRJ104",
+          "content": "Dear PRJ104 students,\n\nThis is to announce that the final exam for Seminar in Intelligence will be held on:\n\n📅 Date: March 13, 2025\n⏰ Time: 07:00 - 09:00\n⏱️ Duration: 120 minutes\n📍 Location: Mathematics Building, Room 111\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Johnson will give a talk on cloud computing",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Smith will give a talk on cybersecurity",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - PRJ104",
+        "content": "Dear PRJ104 students,\n\nThis is to announce that the final exam for Seminar in Intelligence will be held on:\n\n📅 Date: March 13, 2025\n⏰ Time: 07:00 - 09:00\n⏱️ Duration: 120 minutes\n📍 Location: Mathematics Building, Room 111\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Speech Recognition-12",
+      "course_code": "AI205-12",
+      "teacher": "steven.hernandez@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-02-14 16:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Engineering Hall, Room 133",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Course Update #1",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Course Update #1",
+        "content": "Reading materials for next week have been uploaded",
+        "priority": "normal"
+      }
+    },
+    {
+      "name": "Microservices Architecture-13",
+      "course_code": "CLOUD302-13",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-16 11:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Computer Science Building, Room 116",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Course Update #1",
+          "content": "Reminder: Assignment 2 is due next week",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Class schedule change: Next lecture moved to January 18",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Course Update #1",
+        "content": "Reminder: Assignment 2 is due next week",
+        "priority": "normal"
+      }
+    },
+    {
+      "name": "Functional Analysis-14",
+      "course_code": "MATH205-14",
+      "teacher": "steven.hernandez@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-01-22 18:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Biology Building, Room 107",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - MATH205",
+          "content": "Dear MATH205 students,\n\nThis is to announce that the final exam for Functional Analysis will be held on:\n\n📅 Date: January 22, 2025\n⏰ Time: 18:00 - 20:30\n⏱️ Duration: 150 minutes\n📍 Location: Biology Building, Room 107\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reminder: Assignment 1 is due next week",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - MATH205",
+        "content": "Dear MATH205 students,\n\nThis is to announce that the final exam for Functional Analysis will be held on:\n\n📅 Date: January 22, 2025\n⏰ Time: 18:00 - 20:30\n⏱️ Duration: 150 minutes\n📍 Location: Biology Building, Room 107\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Ethical AI-15",
+      "course_code": "AI204-15",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-02-21 08:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Science Center, Room 133",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Course Update #1",
+          "content": "Office hours this week: Thursday 2-4 PM",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Course Update #1",
+        "content": "Office hours this week: Thursday 2-4 PM",
+        "priority": "normal"
+      }
+    },
+    {
+      "name": "Corporate Finance-16",
+      "course_code": "BUS403-16",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-14 13:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 114",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Johnson will give a talk on machine learning",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Course Update #1",
+        "content": "Midterm exam grades are now available on Canvas",
+        "priority": "normal"
+      }
+    },
+    {
+      "name": "Fundamentals of Technology-17",
+      "course_code": "IND264-17",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-04 10:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 115",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - IND264",
+          "content": "Dear IND264 students,\n\nThis is to announce that the final exam for Fundamentals of Technology will be held on:\n\n📅 Date: March 04, 2025\n⏰ Time: 10:00 - 11:30\n⏱️ Duration: 90 minutes\n📍 Location: Main Building, Room 115\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Williams will give a talk on cloud computing",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - IND264",
+        "content": "Dear IND264 students,\n\nThis is to announce that the final exam for Fundamentals of Technology will be held on:\n\n📅 Date: March 04, 2025\n⏰ Time: 10:00 - 11:30\n⏱️ Duration: 90 minutes\n📍 Location: Main Building, Room 115\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Environmental Economics-18",
+      "course_code": "ECON402-18",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 4,
+      "exam_type": "Open-book",
+      "exam_time": "2025-01-20 11:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Biology Building, Room 102",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - ECON402",
+          "content": "Dear ECON402 students,\n\nThis is to announce that the final exam for Environmental Economics will be held on:\n\n📅 Date: January 20, 2025\n⏰ Time: 11:00 - 13:00\n⏱️ Duration: 120 minutes\n📍 Location: Biology Building, Room 102\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reminder: Assignment 2 is due next week",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - ECON402",
+        "content": "Dear ECON402 students,\n\nThis is to announce that the final exam for Environmental Economics will be held on:\n\n📅 Date: January 20, 2025\n⏰ Time: 11:00 - 13:00\n⏱️ Duration: 120 minutes\n📍 Location: Biology Building, Room 102\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Power Systems-19",
+      "course_code": "EE304-19",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-02-12 09:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Lecture Hall Complex, Room 118",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - EE304",
+          "content": "Dear EE304 students,\n\nThis is to announce that the final exam for Power Systems will be held on:\n\n📅 Date: February 12, 2025\n⏰ Time: 09:00 - 11:30\n⏱️ Duration: 150 minutes\n📍 Location: Lecture Hall Complex, Room 118\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Johnson will give a talk on cybersecurity",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Class schedule change: Next lecture moved to January 16",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - EE304",
+        "content": "Dear EE304 students,\n\nThis is to announce that the final exam for Power Systems will be held on:\n\n📅 Date: February 12, 2025\n⏰ Time: 09:00 - 11:30\n⏱️ Duration: 150 minutes\n📍 Location: Lecture Hall Complex, Room 118\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Econometrics-20",
+      "course_code": "ECON301-20",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-10 18:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Academic Building A, Room 106",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - ECON301",
+          "content": "Dear ECON301 students,\n\nThis is to announce that the final exam for Econometrics will be held on:\n\n📅 Date: March 10, 2025\n⏰ Time: 18:00 - 20:00\n⏱️ Duration: 120 minutes\n📍 Location: Academic Building A, Room 106\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reminder: Assignment 1 is due next week",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - ECON301",
+        "content": "Dear ECON301 students,\n\nThis is to announce that the final exam for Econometrics will be held on:\n\n📅 Date: March 10, 2025\n⏰ Time: 18:00 - 20:00\n⏱️ Duration: 120 minutes\n📍 Location: Academic Building A, Room 106\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Workshop in Intelligence-21",
+      "course_code": "SPL298-21",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-04-06 16:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Exam Center, Room 112",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - SPL298",
+          "content": "Dear SPL298 students,\n\nThis is to announce that the final exam for Workshop in Intelligence will be held on:\n\n📅 Date: April 06, 2025\n⏰ Time: 16:00 - 17:30\n⏱️ Duration: 90 minutes\n📍 Location: Exam Center, Room 112\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - SPL298",
+        "content": "Dear SPL298 students,\n\nThis is to announce that the final exam for Workshop in Intelligence will be held on:\n\n📅 Date: April 06, 2025\n⏰ Time: 16:00 - 17:30\n⏱️ Duration: 90 minutes\n📍 Location: Exam Center, Room 112\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Nanochemistry-22",
+      "course_code": "CHEM405-22",
+      "teacher": "steven.hernandez@mcp.com",
+      "credits": 2,
+      "exam_type": "Open-book",
+      "exam_time": "2025-02-08 18:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Academic Building B, Room 115",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - CHEM405",
+          "content": "Dear CHEM405 students,\n\nThis is to announce that the final exam for Nanochemistry will be held on:\n\n📅 Date: February 08, 2025\n⏰ Time: 18:00 - 21:00\n⏱️ Duration: 180 minutes\n📍 Location: Academic Building B, Room 115\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - CHEM405",
+        "content": "Dear CHEM405 students,\n\nThis is to announce that the final exam for Nanochemistry will be held on:\n\n📅 Date: February 08, 2025\n⏰ Time: 18:00 - 21:00\n⏱️ Duration: 180 minutes\n📍 Location: Academic Building B, Room 115\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Algebraic Geometry-23",
+      "course_code": "MATH504-23",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-06 15:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 123",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Course Update #1",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Course Update #1",
+        "content": "Project presentations will be held during the last week of classes",
+        "priority": "normal"
+      }
+    },
+    {
+      "name": "Cross Platform Development-24",
+      "course_code": "MOB401-24",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-02-15 19:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Academic Building B, Room 109",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - MOB401",
+          "content": "Dear MOB401 students,\n\nThis is to announce that the final exam for Cross Platform Development will be held on:\n\n📅 Date: February 15, 2025\n⏰ Time: 19:00 - 21:30\n⏱️ Duration: 150 minutes\n📍 Location: Academic Building B, Room 109\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Smith will give a talk on cybersecurity",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - MOB401",
+        "content": "Dear MOB401 students,\n\nThis is to announce that the final exam for Cross Platform Development will be held on:\n\n📅 Date: February 15, 2025\n⏰ Time: 19:00 - 21:30\n⏱️ Duration: 150 minutes\n📍 Location: Academic Building B, Room 109\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Special Topics in Design-25",
+      "course_code": "HON149-25",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-04-08 09:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Academic Building C, Room 108",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - HON149",
+          "content": "Dear HON149 students,\n\nThis is to announce that the final exam for Special Topics in Design will be held on:\n\n📅 Date: April 08, 2025\n⏰ Time: 09:00 - 11:30\n⏱️ Duration: 150 minutes\n📍 Location: Academic Building C, Room 108\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - HON149",
+        "content": "Dear HON149 students,\n\nThis is to announce that the final exam for Special Topics in Design will be held on:\n\n📅 Date: April 08, 2025\n⏰ Time: 09:00 - 11:30\n⏱️ Duration: 150 minutes\n📍 Location: Academic Building C, Room 108\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Quantum Field Theory-26",
+      "course_code": "PHYS302-26",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-02-10 07:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Engineering Hall, Room 113",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - PHYS302",
+          "content": "Dear PHYS302 students,\n\nThis is to announce that the final exam for Quantum Field Theory will be held on:\n\n📅 Date: February 10, 2025\n⏰ Time: 07:00 - 10:00\n⏱️ Duration: 180 minutes\n📍 Location: Engineering Hall, Room 113\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - PHYS302",
+        "content": "Dear PHYS302 students,\n\nThis is to announce that the final exam for Quantum Field Theory will be held on:\n\n📅 Date: February 10, 2025\n⏰ Time: 07:00 - 10:00\n⏱️ Duration: 180 minutes\n📍 Location: Engineering Hall, Room 113\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Information Visualization-27",
+      "course_code": "HCI501-27",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-02-17 07:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Academic Building B, Room 104",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Williams will give a talk on cloud computing",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reminder: Assignment 5 is due next week",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Course Update #1",
+        "content": "Guest lecture: Dr. Williams will give a talk on cloud computing",
+        "priority": "normal"
+      }
+    },
+    {
+      "name": "Systems Biology-28",
+      "course_code": "BIO504-28",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-02-19 08:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Computer Science Building, Room 109",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - BIO504",
+          "content": "Dear BIO504 students,\n\nThis is to announce that the final exam for Systems Biology will be held on:\n\n📅 Date: February 19, 2025\n⏰ Time: 08:00 - 10:30\n⏱️ Duration: 150 minutes\n📍 Location: Computer Science Building, Room 109\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reminder: Assignment 5 is due next week",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Williams will give a talk on machine learning",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - BIO504",
+        "content": "Dear BIO504 students,\n\nThis is to announce that the final exam for Systems Biology will be held on:\n\n📅 Date: February 19, 2025\n⏰ Time: 08:00 - 10:30\n⏱️ Duration: 150 minutes\n📍 Location: Computer Science Building, Room 109\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Independent Study in Simulation-29",
+      "course_code": "IND295-29",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-20 19:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Library, Room 105",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - IND295",
+          "content": "Dear IND295 students,\n\nThis is to announce that the final exam for Independent Study in Simulation will be held on:\n\n📅 Date: March 20, 2025\n⏰ Time: 19:00 - 21:00\n⏱️ Duration: 120 minutes\n📍 Location: Library, Room 105\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reminder: Assignment 1 is due next week",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - IND295",
+        "content": "Dear IND295 students,\n\nThis is to announce that the final exam for Independent Study in Simulation will be held on:\n\n📅 Date: March 20, 2025\n⏰ Time: 19:00 - 21:00\n⏱️ Duration: 120 minutes\n📍 Location: Library, Room 105\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Economic History-30",
+      "course_code": "ECON404-30",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-04-03 09:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Lecture Hall Complex, Room 117",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - ECON404",
+          "content": "Dear ECON404 students,\n\nThis is to announce that the final exam for Economic History will be held on:\n\n📅 Date: April 03, 2025\n⏰ Time: 09:00 - 12:00\n⏱️ Duration: 180 minutes\n📍 Location: Lecture Hall Complex, Room 117\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reminder: Assignment 1 is due next week",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Office hours this week: Thursday 2-4 PM",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - ECON404",
+        "content": "Dear ECON404 students,\n\nThis is to announce that the final exam for Economic History will be held on:\n\n📅 Date: April 03, 2025\n⏰ Time: 09:00 - 12:00\n⏱️ Duration: 180 minutes\n📍 Location: Lecture Hall Complex, Room 117\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Mathematical Economics-31",
+      "course_code": "ECON105-31",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 2,
+      "exam_type": "Open-book",
+      "exam_time": "2025-04-03 19:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Physics Building, Room 104",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - ECON105",
+          "content": "Dear ECON105 students,\n\nThis is to announce that the final exam for Mathematical Economics will be held on:\n\n📅 Date: April 03, 2025\n⏰ Time: 19:00 - 22:00\n⏱️ Duration: 180 minutes\n📍 Location: Physics Building, Room 104\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Williams will give a talk on cybersecurity",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - ECON105",
+        "content": "Dear ECON105 students,\n\nThis is to announce that the final exam for Mathematical Economics will be held on:\n\n📅 Date: April 03, 2025\n⏰ Time: 19:00 - 22:00\n⏱️ Duration: 180 minutes\n📍 Location: Physics Building, Room 104\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Research in Design-32",
+      "course_code": "LAB245-32",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-04-04 14:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Business School, Room 116",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - LAB245",
+          "content": "Dear LAB245 students,\n\nThis is to announce that the final exam for Research in Design will be held on:\n\n📅 Date: April 04, 2025\n⏰ Time: 14:00 - 16:30\n⏱️ Duration: 150 minutes\n📍 Location: Business School, Room 116\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - LAB245",
+        "content": "Dear LAB245 students,\n\nThis is to announce that the final exam for Research in Design will be held on:\n\n📅 Date: April 04, 2025\n⏰ Time: 14:00 - 16:30\n⏱️ Duration: 150 minutes\n📍 Location: Business School, Room 116\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Applications of Science-33",
+      "course_code": "IND161-33",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-01-19 09:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Exam Center, Room 129",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - IND161",
+          "content": "Dear IND161 students,\n\nThis is to announce that the final exam for Applications of Science will be held on:\n\n📅 Date: January 19, 2025\n⏰ Time: 09:00 - 11:00\n⏱️ Duration: 120 minutes\n📍 Location: Exam Center, Room 129\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reminder: Assignment 2 is due next week",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - IND161",
+        "content": "Dear IND161 students,\n\nThis is to announce that the final exam for Applications of Science will be held on:\n\n📅 Date: January 19, 2025\n⏰ Time: 09:00 - 11:00\n⏱️ Duration: 120 minutes\n📍 Location: Exam Center, Room 129\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Inorganic Chemistry-34",
+      "course_code": "CHEM301-34",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-03-06 17:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 117",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - CHEM301",
+          "content": "Dear CHEM301 students,\n\nThis is to announce that the final exam for Inorganic Chemistry will be held on:\n\n📅 Date: March 06, 2025\n⏰ Time: 17:00 - 19:30\n⏱️ Duration: 150 minutes\n📍 Location: Main Building, Room 117\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 18",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Class schedule change: Next lecture moved to January 17",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - CHEM301",
+        "content": "Dear CHEM301 students,\n\nThis is to announce that the final exam for Inorganic Chemistry will be held on:\n\n📅 Date: March 06, 2025\n⏰ Time: 17:00 - 19:30\n⏱️ Duration: 150 minutes\n📍 Location: Main Building, Room 117\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Photovoltaics-35",
+      "course_code": "EE307-35",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-24 13:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Mathematics Building, Room 104",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Course Update #1",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reminder: Assignment 3 is due next week",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Course Update #1",
+        "content": "Survey: Please fill out the course evaluation form",
+        "priority": "normal"
+      }
+    },
+    {
+      "name": "Bayesian Statistics-36",
+      "course_code": "MATH210-36",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-03-23 14:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Exam Center, Room 105",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - MATH210",
+          "content": "Dear MATH210 students,\n\nThis is to announce that the final exam for Bayesian Statistics will be held on:\n\n📅 Date: March 23, 2025\n⏰ Time: 14:00 - 17:00\n⏱️ Duration: 180 minutes\n📍 Location: Exam Center, Room 105\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Smith will give a talk on machine learning",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - MATH210",
+        "content": "Dear MATH210 students,\n\nThis is to announce that the final exam for Bayesian Statistics will be held on:\n\n📅 Date: March 23, 2025\n⏰ Time: 14:00 - 17:00\n⏱️ Duration: 180 minutes\n📍 Location: Exam Center, Room 105\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "General Chemistry-37",
+      "course_code": "CHEM101-37",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 4,
+      "exam_type": "Open-book",
+      "exam_time": "2025-04-14 15:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Engineering Hall, Room 113",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - CHEM101",
+          "content": "Dear CHEM101 students,\n\nThis is to announce that the final exam for General Chemistry will be held on:\n\n📅 Date: April 14, 2025\n⏰ Time: 15:00 - 17:30\n⏱️ Duration: 150 minutes\n📍 Location: Engineering Hall, Room 113\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - CHEM101",
+        "content": "Dear CHEM101 students,\n\nThis is to announce that the final exam for General Chemistry will be held on:\n\n📅 Date: April 14, 2025\n⏰ Time: 15:00 - 17:30\n⏱️ Duration: 150 minutes\n📍 Location: Engineering Hall, Room 113\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Marine Engineering-38",
+      "course_code": "ME403-38",
+      "teacher": "steven.hernandez@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-01-27 18:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Liberal Arts Building, Room 109",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - ME403",
+          "content": "Dear ME403 students,\n\nThis is to announce that the final exam for Marine Engineering will be held on:\n\n📅 Date: January 27, 2025\n⏰ Time: 18:00 - 21:00\n⏱️ Duration: 180 minutes\n📍 Location: Liberal Arts Building, Room 109\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reminder: Assignment 5 is due next week",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - ME403",
+        "content": "Dear ME403 students,\n\nThis is to announce that the final exam for Marine Engineering will be held on:\n\n📅 Date: January 27, 2025\n⏰ Time: 18:00 - 21:00\n⏱️ Duration: 180 minutes\n📍 Location: Liberal Arts Building, Room 109\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Biotechnology-39",
+      "course_code": "BIO405-39",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-04-15 18:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Science Center, Room 140",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - BIO405",
+          "content": "Dear BIO405 students,\n\nThis is to announce that the final exam for Biotechnology will be held on:\n\n📅 Date: April 15, 2025\n⏰ Time: 18:00 - 20:00\n⏱️ Duration: 120 minutes\n📍 Location: Science Center, Room 140\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - BIO405",
+        "content": "Dear BIO405 students,\n\nThis is to announce that the final exam for Biotechnology will be held on:\n\n📅 Date: April 15, 2025\n⏰ Time: 18:00 - 20:00\n⏱️ Duration: 120 minutes\n📍 Location: Science Center, Room 140\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Nuclear Chemistry-40",
+      "course_code": "CHEM406-40",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-20 07:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Computer Science Building, Room 105",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - CHEM406",
+          "content": "Dear CHEM406 students,\n\nThis is to announce that the final exam for Nuclear Chemistry will be held on:\n\n📅 Date: March 20, 2025\n⏰ Time: 07:00 - 09:00\n⏱️ Duration: 120 minutes\n📍 Location: Computer Science Building, Room 105\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 18",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Smith will give a talk on cloud computing",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - CHEM406",
+        "content": "Dear CHEM406 students,\n\nThis is to announce that the final exam for Nuclear Chemistry will be held on:\n\n📅 Date: March 20, 2025\n⏰ Time: 07:00 - 09:00\n⏱️ Duration: 120 minutes\n📍 Location: Computer Science Building, Room 105\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Research in Science-41",
+      "course_code": "INT117-41",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-01-24 11:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Mathematics Building, Room 104",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - INT117",
+          "content": "Dear INT117 students,\n\nThis is to announce that the final exam for Research in Science will be held on:\n\n📅 Date: January 24, 2025\n⏰ Time: 11:00 - 12:30\n⏱️ Duration: 90 minutes\n📍 Location: Mathematics Building, Room 104\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reminder: Assignment 4 is due next week",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Johnson will give a talk on cloud computing",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - INT117",
+        "content": "Dear INT117 students,\n\nThis is to announce that the final exam for Research in Science will be held on:\n\n📅 Date: January 24, 2025\n⏰ Time: 11:00 - 12:30\n⏱️ Duration: 90 minutes\n📍 Location: Mathematics Building, Room 104\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Materials Chemistry-42",
+      "course_code": "CHEM302-42",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-02-25 18:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 138",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - CHEM302",
+          "content": "Dear CHEM302 students,\n\nThis is to announce that the final exam for Materials Chemistry will be held on:\n\n📅 Date: February 25, 2025\n⏰ Time: 18:00 - 20:00\n⏱️ Duration: 120 minutes\n📍 Location: Main Building, Room 138\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Class schedule change: Next lecture moved to January 16",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - CHEM302",
+        "content": "Dear CHEM302 students,\n\nThis is to announce that the final exam for Materials Chemistry will be held on:\n\n📅 Date: February 25, 2025\n⏰ Time: 18:00 - 20:00\n⏱️ Duration: 120 minutes\n📍 Location: Main Building, Room 138\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Laboratory in Intelligence-43",
+      "course_code": "SEM279-43",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 4,
+      "exam_type": "Open-book",
+      "exam_time": "2025-02-01 14:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Library, Room 108",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - SEM279",
+          "content": "Dear SEM279 students,\n\nThis is to announce that the final exam for Laboratory in Intelligence will be held on:\n\n📅 Date: February 01, 2025\n⏰ Time: 14:00 - 16:00\n⏱️ Duration: 120 minutes\n📍 Location: Library, Room 108\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Office hours this week: Tuesday 2-4 PM",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - SEM279",
+        "content": "Dear SEM279 students,\n\nThis is to announce that the final exam for Laboratory in Intelligence will be held on:\n\n📅 Date: February 01, 2025\n⏰ Time: 14:00 - 16:00\n⏱️ Duration: 120 minutes\n📍 Location: Library, Room 108\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Workshop in Applications-44",
+      "course_code": "PRJ278-44",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 2,
+      "exam_type": "Open-book",
+      "exam_time": "2025-03-01 16:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Business School, Room 121",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - PRJ278",
+          "content": "Dear PRJ278 students,\n\nThis is to announce that the final exam for Workshop in Applications will be held on:\n\n📅 Date: March 01, 2025\n⏰ Time: 16:00 - 18:00\n⏱️ Duration: 120 minutes\n📍 Location: Business School, Room 121\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Smith will give a talk on cybersecurity",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Johnson will give a talk on cloud computing",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - PRJ278",
+        "content": "Dear PRJ278 students,\n\nThis is to announce that the final exam for Workshop in Applications will be held on:\n\n📅 Date: March 01, 2025\n⏰ Time: 16:00 - 18:00\n⏱️ Duration: 120 minutes\n📍 Location: Business School, Room 121\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Independent Study in Analytics-45",
+      "course_code": "ADV172-45",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-04-01 17:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Science Center, Room 129",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - ADV172",
+          "content": "Dear ADV172 students,\n\nThis is to announce that the final exam for Independent Study in Analytics will be held on:\n\n📅 Date: April 01, 2025\n⏰ Time: 17:00 - 19:30\n⏱️ Duration: 150 minutes\n📍 Location: Science Center, Room 129\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Office hours this week: Wednesday 2-4 PM",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - ADV172",
+        "content": "Dear ADV172 students,\n\nThis is to announce that the final exam for Independent Study in Analytics will be held on:\n\n📅 Date: April 01, 2025\n⏰ Time: 17:00 - 19:30\n⏱️ Duration: 150 minutes\n📍 Location: Science Center, Room 129\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Geometry-46",
+      "course_code": "MATH404-46",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-01-21 18:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Exam Center, Room 113",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - MATH404",
+          "content": "Dear MATH404 students,\n\nThis is to announce that the final exam for Geometry will be held on:\n\n📅 Date: January 21, 2025\n⏰ Time: 18:00 - 19:30\n⏱️ Duration: 90 minutes\n📍 Location: Exam Center, Room 113\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Smith will give a talk on cloud computing",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - MATH404",
+        "content": "Dear MATH404 students,\n\nThis is to announce that the final exam for Geometry will be held on:\n\n📅 Date: January 21, 2025\n⏰ Time: 18:00 - 19:30\n⏱️ Duration: 90 minutes\n📍 Location: Exam Center, Room 113\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Molecular Biology-47",
+      "course_code": "BIO301-47",
+      "teacher": "steven.hernandez@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-02-22 18:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Business School, Room 130",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - BIO301",
+          "content": "Dear BIO301 students,\n\nThis is to announce that the final exam for Molecular Biology will be held on:\n\n📅 Date: February 22, 2025\n⏰ Time: 18:00 - 21:00\n⏱️ Duration: 180 minutes\n📍 Location: Business School, Room 130\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Johnson will give a talk on cloud computing",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - BIO301",
+        "content": "Dear BIO301 students,\n\nThis is to announce that the final exam for Molecular Biology will be held on:\n\n📅 Date: February 22, 2025\n⏰ Time: 18:00 - 21:00\n⏱️ Duration: 180 minutes\n📍 Location: Business School, Room 130\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Research in Mathematics-48",
+      "course_code": "PRJ292-48",
+      "teacher": "steven.hernandez@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-04-14 07:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Science Center, Room 131",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - PRJ292",
+          "content": "Dear PRJ292 students,\n\nThis is to announce that the final exam for Research in Mathematics will be held on:\n\n📅 Date: April 14, 2025\n⏰ Time: 07:00 - 08:30\n⏱️ Duration: 90 minutes\n📍 Location: Science Center, Room 131\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - PRJ292",
+        "content": "Dear PRJ292 students,\n\nThis is to announce that the final exam for Research in Mathematics will be held on:\n\n📅 Date: April 14, 2025\n⏰ Time: 07:00 - 08:30\n⏱️ Duration: 90 minutes\n📍 Location: Science Center, Room 131\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Honors Science-49",
+      "course_code": "LAB144-49",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-22 16:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Science Center, Room 105",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - LAB144",
+          "content": "Dear LAB144 students,\n\nThis is to announce that the final exam for Honors Science will be held on:\n\n📅 Date: March 22, 2025\n⏰ Time: 16:00 - 18:30\n⏱️ Duration: 150 minutes\n📍 Location: Science Center, Room 105\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Williams will give a talk on machine learning",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - LAB144",
+        "content": "Dear LAB144 students,\n\nThis is to announce that the final exam for Honors Science will be held on:\n\n📅 Date: March 22, 2025\n⏰ Time: 16:00 - 18:30\n⏱️ Duration: 150 minutes\n📍 Location: Science Center, Room 105\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Frontend Development-50",
+      "course_code": "WEB201-50",
+      "teacher": "steven.hernandez@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-01-22 11:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Computer Science Building, Room 117",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - WEB201",
+          "content": "Dear WEB201 students,\n\nThis is to announce that the final exam for Frontend Development will be held on:\n\n📅 Date: January 22, 2025\n⏰ Time: 11:00 - 12:30\n⏱️ Duration: 90 minutes\n📍 Location: Computer Science Building, Room 117\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Johnson will give a talk on machine learning",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - WEB201",
+        "content": "Dear WEB201 students,\n\nThis is to announce that the final exam for Frontend Development will be held on:\n\n📅 Date: January 22, 2025\n⏰ Time: 11:00 - 12:30\n⏱️ Duration: 90 minutes\n📍 Location: Computer Science Building, Room 117\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Network Troubleshooting-51",
+      "course_code": "NET203-51",
+      "teacher": "steven.hernandez@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-20 16:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Chemistry Building, Room 110",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Course Update #1",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Course Update #1",
+        "content": "Survey: Please fill out the course evaluation form",
+        "priority": "normal"
+      }
+    },
+    {
+      "name": "Independent Study in Technology-52",
+      "course_code": "HON273-52",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-02-15 10:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Exam Center, Room 116",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - HON273",
+          "content": "Dear HON273 students,\n\nThis is to announce that the final exam for Independent Study in Technology will be held on:\n\n📅 Date: February 15, 2025\n⏰ Time: 10:00 - 13:00\n⏱️ Duration: 180 minutes\n📍 Location: Exam Center, Room 116\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 16",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Williams will give a talk on cybersecurity",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - HON273",
+        "content": "Dear HON273 students,\n\nThis is to announce that the final exam for Independent Study in Technology will be held on:\n\n📅 Date: February 15, 2025\n⏰ Time: 10:00 - 13:00\n⏱️ Duration: 180 minutes\n📍 Location: Exam Center, Room 116\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Special Topics in Practice-53",
+      "course_code": "LAB678-53",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-02-21 16:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 105",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - LAB678",
+          "content": "Dear LAB678 students,\n\nThis course does not have a final exam. Your final grade will be based on coursework and projects.\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Office hours this week: Tuesday 2-4 PM",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - LAB678",
+        "content": "Dear LAB678 students,\n\nThis course does not have a final exam. Your final grade will be based on coursework and projects.\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Advanced Applications-54",
+      "course_code": "INT694-54",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-03-03 07:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Mathematics Building, Room 106",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - INT694",
+          "content": "Dear INT694 students,\n\nThis is to announce that the final exam for Advanced Applications will be held on:\n\n📅 Date: March 03, 2025\n⏰ Time: 07:00 - 10:00\n⏱️ Duration: 180 minutes\n📍 Location: Mathematics Building, Room 106\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Johnson will give a talk on cloud computing",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - INT694",
+        "content": "Dear INT694 students,\n\nThis is to announce that the final exam for Advanced Applications will be held on:\n\n📅 Date: March 03, 2025\n⏰ Time: 07:00 - 10:00\n⏱️ Duration: 180 minutes\n📍 Location: Mathematics Building, Room 106\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Cloud Computing-55",
+      "course_code": "IS104-55",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-21 15:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Lecture Hall Complex, Room 119",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - IS104",
+          "content": "Dear IS104 students,\n\nThis is to announce that the final exam for Cloud Computing will be held on:\n\n📅 Date: March 21, 2025\n⏰ Time: 15:00 - 18:00\n⏱️ Duration: 180 minutes\n📍 Location: Lecture Hall Complex, Room 119\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Office hours this week: Wednesday 2-4 PM",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - IS104",
+        "content": "Dear IS104 students,\n\nThis is to announce that the final exam for Cloud Computing will be held on:\n\n📅 Date: March 21, 2025\n⏰ Time: 15:00 - 18:00\n⏱️ Duration: 180 minutes\n📍 Location: Lecture Hall Complex, Room 119\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Principles of Analytics-56",
+      "course_code": "SPL198-56",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-04 13:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Exam Center, Room 103",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - SPL198",
+          "content": "Dear SPL198 students,\n\nThis is to announce that the final exam for Principles of Analytics will be held on:\n\n📅 Date: March 04, 2025\n⏰ Time: 13:00 - 16:00\n⏱️ Duration: 180 minutes\n📍 Location: Exam Center, Room 103\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - SPL198",
+        "content": "Dear SPL198 students,\n\nThis is to announce that the final exam for Principles of Analytics will be held on:\n\n📅 Date: March 04, 2025\n⏰ Time: 13:00 - 16:00\n⏱️ Duration: 180 minutes\n📍 Location: Exam Center, Room 103\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Principles of Practice-57",
+      "course_code": "RES679-57",
+      "teacher": "steven.hernandez@mcp.com",
+      "credits": 2,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-01-20 09:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Liberal Arts Building, Room 116",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - RES679",
+          "content": "Dear RES679 students,\n\nThis is to announce that the final exam for Principles of Practice will be held on:\n\n📅 Date: January 20, 2025\n⏰ Time: 09:00 - 10:30\n⏱️ Duration: 90 minutes\n📍 Location: Liberal Arts Building, Room 116\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 16",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Williams will give a talk on machine learning",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - RES679",
+        "content": "Dear RES679 students,\n\nThis is to announce that the final exam for Principles of Practice will be held on:\n\n📅 Date: January 20, 2025\n⏰ Time: 09:00 - 10:30\n⏱️ Duration: 90 minutes\n📍 Location: Liberal Arts Building, Room 116\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Project in Modeling-58",
+      "course_code": "ADV159-58",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-02-05 14:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Academic Building A, Room 103",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - ADV159",
+          "content": "Dear ADV159 students,\n\nThis is to announce that the final exam for Project in Modeling will be held on:\n\n📅 Date: February 05, 2025\n⏰ Time: 14:00 - 16:30\n⏱️ Duration: 150 minutes\n📍 Location: Academic Building A, Room 103\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Johnson will give a talk on machine learning",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - ADV159",
+        "content": "Dear ADV159 students,\n\nThis is to announce that the final exam for Project in Modeling will be held on:\n\n📅 Date: February 05, 2025\n⏰ Time: 14:00 - 16:30\n⏱️ Duration: 150 minutes\n📍 Location: Academic Building A, Room 103\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Independent Study in Mathematics-59",
+      "course_code": "INT151-59",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-17 07:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Computer Science Building, Room 109",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - INT151",
+          "content": "Dear INT151 students,\n\nThis is to announce that the final exam for Independent Study in Mathematics will be held on:\n\n📅 Date: March 17, 2025\n⏰ Time: 07:00 - 09:30\n⏱️ Duration: 150 minutes\n📍 Location: Computer Science Building, Room 109\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Reminder: Assignment 2 is due next week",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - INT151",
+        "content": "Dear INT151 students,\n\nThis is to announce that the final exam for Independent Study in Mathematics will be held on:\n\n📅 Date: March 17, 2025\n⏰ Time: 07:00 - 09:30\n⏱️ Duration: 150 minutes\n📍 Location: Computer Science Building, Room 109\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Independent Study in Simulation-60",
+      "course_code": "GRD140-60",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-04-02 15:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Business School, Room 111",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 18",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Course Update #1",
+        "content": "Class schedule change: Next lecture moved to January 18",
+        "priority": "normal"
+      }
+    },
+    {
+      "name": "Entrepreneurship-61",
+      "course_code": "BUS206-61",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-02-03 18:00",
+      "duration": "180",
+      "duration_unit": "minutes",
+      "location": "Engineering Hall, Room 135",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - BUS206",
+          "content": "Dear BUS206 students,\n\nThis is to announce that the final exam for Entrepreneurship will be held on:\n\n📅 Date: February 03, 2025\n⏰ Time: 18:00 - 21:00\n⏱️ Duration: 180 minutes\n📍 Location: Engineering Hall, Room 135\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - BUS206",
+        "content": "Dear BUS206 students,\n\nThis is to announce that the final exam for Entrepreneurship will be held on:\n\n📅 Date: February 03, 2025\n⏰ Time: 18:00 - 21:00\n⏱️ Duration: 180 minutes\n📍 Location: Engineering Hall, Room 135\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Seminar in Systems-62",
+      "course_code": "ADV143-62",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 4,
+      "exam_type": "Open-book",
+      "exam_time": "2025-03-10 09:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Mathematics Building, Room 112",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Johnson will give a talk on cloud computing",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Williams will give a talk on machine learning",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Course Update #1",
+        "content": "Guest lecture: Dr. Johnson will give a talk on cloud computing",
+        "priority": "normal"
+      }
+    },
+    {
+      "name": "Cost Accounting-63",
+      "course_code": "BUS504-63",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-02-02 16:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Engineering Hall, Room 117",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - BUS504",
+          "content": "Dear BUS504 students,\n\nThis is to announce that the final exam for Cost Accounting will be held on:\n\n📅 Date: February 02, 2025\n⏰ Time: 16:00 - 17:30\n⏱️ Duration: 90 minutes\n📍 Location: Engineering Hall, Room 117\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Smith will give a talk on cloud computing",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reading materials for next week have been uploaded",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - BUS504",
+        "content": "Dear BUS504 students,\n\nThis is to announce that the final exam for Cost Accounting will be held on:\n\n📅 Date: February 02, 2025\n⏰ Time: 16:00 - 17:30\n⏱️ Duration: 90 minutes\n📍 Location: Engineering Hall, Room 117\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Biochemistry-64",
+      "course_code": "CHEM102-64",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-26 13:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Academic Building C, Room 104",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - CHEM102",
+          "content": "Dear CHEM102 students,\n\nThis is to announce that the final exam for Biochemistry will be held on:\n\n📅 Date: March 26, 2025\n⏰ Time: 13:00 - 15:30\n⏱️ Duration: 150 minutes\n📍 Location: Academic Building C, Room 104\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Williams will give a talk on cloud computing",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Williams will give a talk on cybersecurity",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - CHEM102",
+        "content": "Dear CHEM102 students,\n\nThis is to announce that the final exam for Biochemistry will be held on:\n\n📅 Date: March 26, 2025\n⏰ Time: 13:00 - 15:30\n⏱️ Duration: 150 minutes\n📍 Location: Academic Building C, Room 104\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "CRM Systems-65",
+      "course_code": "IS202-65",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 4,
+      "exam_type": "Open-book",
+      "exam_time": "2025-02-13 11:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Business School, Room 123",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - IS202",
+          "content": "Dear IS202 students,\n\nThis is to announce that the final exam for CRM Systems will be held on:\n\n📅 Date: February 13, 2025\n⏰ Time: 11:00 - 13:30\n⏱️ Duration: 150 minutes\n📍 Location: Business School, Room 123\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Guest lecture: Dr. Johnson will give a talk on cloud computing",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reminder: Assignment 3 is due next week",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - IS202",
+        "content": "Dear IS202 students,\n\nThis is to announce that the final exam for CRM Systems will be held on:\n\n📅 Date: February 13, 2025\n⏰ Time: 11:00 - 13:30\n⏱️ Duration: 150 minutes\n📍 Location: Business School, Room 123\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Real Analysis-66",
+      "course_code": "MATH103-66",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-03-30 18:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Lecture Hall Complex, Room 116",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - MATH103",
+          "content": "Dear MATH103 students,\n\nThis is to announce that the final exam for Real Analysis will be held on:\n\n📅 Date: March 30, 2025\n⏰ Time: 18:00 - 20:30\n⏱️ Duration: 150 minutes\n📍 Location: Lecture Hall Complex, Room 116\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Survey: Please fill out the course evaluation form",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - MATH103",
+        "content": "Dear MATH103 students,\n\nThis is to announce that the final exam for Real Analysis will be held on:\n\n📅 Date: March 30, 2025\n⏰ Time: 18:00 - 20:30\n⏱️ Duration: 150 minutes\n📍 Location: Lecture Hall Complex, Room 116\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Peer-to-Peer Networks-67",
+      "course_code": "NET204-67",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 4,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-01-21 11:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 141",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - NET204",
+          "content": "Dear NET204 students,\n\nThis is to announce that the final exam for Peer will be held on:\n\n📅 Date: January 21, 2025\n⏰ Time: 11:00 - 13:30\n⏱️ Duration: 150 minutes\n📍 Location: Main Building, Room 141\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Office hours this week: Thursday 2-4 PM",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - NET204",
+        "content": "Dear NET204 students,\n\nThis is to announce that the final exam for Peer will be held on:\n\n📅 Date: January 21, 2025\n⏰ Time: 11:00 - 13:30\n⏱️ Duration: 150 minutes\n📍 Location: Main Building, Room 141\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Information Architecture-68",
+      "course_code": "IS402-68",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 4,
+      "exam_type": "Open-book",
+      "exam_time": "2025-03-28 19:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Business School, Room 115",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - IS402",
+          "content": "Dear IS402 students,\n\nThis is to announce that the final exam for Information Architecture will be held on:\n\n📅 Date: March 28, 2025\n⏰ Time: 19:00 - 21:30\n⏱️ Duration: 150 minutes\n📍 Location: Business School, Room 115\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 17",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Reminder: Assignment 5 is due next week",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - IS402",
+        "content": "Dear IS402 students,\n\nThis is to announce that the final exam for Information Architecture will be held on:\n\n📅 Date: March 28, 2025\n⏰ Time: 19:00 - 21:30\n⏱️ Duration: 150 minutes\n📍 Location: Business School, Room 115\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Applications of Research-69",
+      "course_code": "GRD147-69",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 2,
+      "exam_type": "Open-book",
+      "exam_time": "2025-04-07 10:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Main Building, Room 127",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - GRD147",
+          "content": "Dear GRD147 students,\n\nThis is to announce that the final exam for Applications of Research will be held on:\n\n📅 Date: April 07, 2025\n⏰ Time: 10:00 - 12:00\n⏱️ Duration: 120 minutes\n📍 Location: Main Building, Room 127\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Class schedule change: Next lecture moved to January 16",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - GRD147",
+        "content": "Dear GRD147 students,\n\nThis is to announce that the final exam for Applications of Research will be held on:\n\n📅 Date: April 07, 2025\n⏰ Time: 10:00 - 12:00\n⏱️ Duration: 120 minutes\n📍 Location: Main Building, Room 127\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Marketing Management-70",
+      "course_code": "BUS202-70",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-01-16 16:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Science Center, Room 131",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - BUS202",
+          "content": "Dear BUS202 students,\n\nThis is to announce that the final exam for Marketing Management will be held on:\n\n📅 Date: January 16, 2025\n⏰ Time: 16:00 - 18:00\n⏱️ Duration: 120 minutes\n📍 Location: Science Center, Room 131\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Johnson will give a talk on machine learning",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - BUS202",
+        "content": "Dear BUS202 students,\n\nThis is to announce that the final exam for Marketing Management will be held on:\n\n📅 Date: January 16, 2025\n⏰ Time: 16:00 - 18:00\n⏱️ Duration: 120 minutes\n📍 Location: Science Center, Room 131\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Reinforced Concrete-71",
+      "course_code": "CE301-71",
+      "teacher": "smith.johnson@mcp.com",
+      "credits": 4,
+      "exam_type": "Open-book",
+      "exam_time": "2025-01-23 08:00",
+      "duration": "150",
+      "duration_unit": "minutes",
+      "location": "Academic Building B, Room 106",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - CE301",
+          "content": "Dear CE301 students,\n\nThis is to announce that the final exam for Reinforced Concrete will be held on:\n\n📅 Date: January 23, 2025\n⏰ Time: 08:00 - 10:30\n⏱️ Duration: 150 minutes\n📍 Location: Academic Building B, Room 106\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Office hours this week: Wednesday 2-4 PM",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Office hours this week: Thursday 2-4 PM",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - CE301",
+        "content": "Dear CE301 students,\n\nThis is to announce that the final exam for Reinforced Concrete will be held on:\n\n📅 Date: January 23, 2025\n⏰ Time: 08:00 - 10:30\n⏱️ Duration: 150 minutes\n📍 Location: Academic Building B, Room 106\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Workshop in Computing-72",
+      "course_code": "INT106-72",
+      "teacher": "emily.davis@mcp.com",
+      "credits": 3,
+      "exam_type": "Open-book",
+      "exam_time": "2025-01-20 14:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Library, Room 104",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - INT106",
+          "content": "Dear INT106 students,\n\nThis is to announce that the final exam for Workshop in Computing will be held on:\n\n📅 Date: January 20, 2025\n⏰ Time: 14:00 - 16:00\n⏱️ Duration: 120 minutes\n📍 Location: Library, Room 104\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 18",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Guest lecture: Dr. Smith will give a talk on cloud computing",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - INT106",
+        "content": "Dear INT106 students,\n\nThis is to announce that the final exam for Workshop in Computing will be held on:\n\n📅 Date: January 20, 2025\n⏰ Time: 14:00 - 16:00\n⏱️ Duration: 120 minutes\n📍 Location: Library, Room 104\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Ontology Engineering-73",
+      "course_code": "CS312-73",
+      "teacher": "christopher.miller@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-02-27 11:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Chemistry Building, Room 103",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - CS312",
+          "content": "Dear CS312 students,\n\nThis is to announce that the final exam for Ontology Engineering will be held on:\n\n📅 Date: February 27, 2025\n⏰ Time: 11:00 - 12:30\n⏱️ Duration: 90 minutes\n📍 Location: Chemistry Building, Room 103\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Midterm exam grades are now available on Canvas",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Office hours this week: Thursday 2-4 PM",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - CS312",
+        "content": "Dear CS312 students,\n\nThis is to announce that the final exam for Ontology Engineering will be held on:\n\n📅 Date: February 27, 2025\n⏰ Time: 11:00 - 12:30\n⏱️ Duration: 90 minutes\n📍 Location: Chemistry Building, Room 103\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Computational Economics-74",
+      "course_code": "ECON205-74",
+      "teacher": "steven.hernandez@mcp.com",
+      "credits": 4,
+      "exam_type": "Open-book",
+      "exam_time": "2025-03-15 18:00",
+      "duration": "90",
+      "duration_unit": "minutes",
+      "location": "Business School, Room 107",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - ECON205",
+          "content": "Dear ECON205 students,\n\nThis is to announce that the final exam for Computational Economics will be held on:\n\n📅 Date: March 15, 2025\n⏰ Time: 18:00 - 19:30\n⏱️ Duration: 90 minutes\n📍 Location: Business School, Room 107\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 17",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Project presentations will be held during the last week of classes",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - ECON205",
+        "content": "Dear ECON205 students,\n\nThis is to announce that the final exam for Computational Economics will be held on:\n\n📅 Date: March 15, 2025\n⏰ Time: 18:00 - 19:30\n⏱️ Duration: 90 minutes\n📍 Location: Business School, Room 107\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    },
+    {
+      "name": "Mobile App Development-75",
+      "course_code": "MOB101-75",
+      "teacher": "debra_flores76@mcp.com",
+      "credits": 3,
+      "exam_type": "Closed-book",
+      "exam_time": "2025-02-07 17:00",
+      "duration": "120",
+      "duration_unit": "minutes",
+      "location": "Academic Building A, Room 115",
+      "students": [
+        "rkelly27@mcp.com"
+      ],
+      "announcements": [
+        {
+          "title": "Final Exam Announcement - MOB101",
+          "content": "Dear MOB101 students,\n\nThis is to announce that the final exam for Mobile App Development will be held on:\n\n📅 Date: February 07, 2025\n⏰ Time: 17:00 - 19:00\n⏱️ Duration: 120 minutes\n📍 Location: Academic Building A, Room 115\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+          "priority": "high"
+        },
+        {
+          "title": "Course Update #1",
+          "content": "Class schedule change: Next lecture moved to January 17",
+          "priority": "normal"
+        },
+        {
+          "title": "Course Update #2",
+          "content": "Class schedule change: Next lecture moved to January 18",
+          "priority": "normal"
+        }
+      ],
+      "announcement": {
+        "title": "Final Exam Announcement - MOB101",
+        "content": "Dear MOB101 students,\n\nThis is to announce that the final exam for Mobile App Development will be held on:\n\n📅 Date: February 07, 2025\n⏰ Time: 17:00 - 19:00\n⏱️ Duration: 120 minutes\n📍 Location: Academic Building A, Room 115\n\nPlease arrive 15 minutes before the exam time. Bring your student ID and necessary writing materials.\n\nGood luck!\n\nBest regards,\nCourse Instructor",
+        "priority": "high"
+      }
+    }
+  ]
+}

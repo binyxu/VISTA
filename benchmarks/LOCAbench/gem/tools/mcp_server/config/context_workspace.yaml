@@ -1,0 +1,27 @@
+# Context Workspace MCP Server Configuration
+name: context_workspace
+display_name: Context Workspace MCP Server
+description: Self-managed context tools for archiving and monitoring context health
+
+execution:
+  command_type: python
+  script:
+    primary: "gem/tools/mcp_server/context_workspace/server.py"
+    fallbacks: []
+
+parameters:
+  workspace_dir:
+    required: false
+    default: "{agent_workspace}/context_workspace"
+    cli_arg: "--workspace-dir"
+    description: "Directory for workspace state persistence"
+  payload_dir:
+    required: false
+    default: "{agent_workspace}/.sms_payloads"
+    cli_arg: "--payload-dir"
+    description: "Agent-readable directory for external payload files"
+
+workspace:
+  set_cwd: false
+  supports_placeholders: true
+  mkdir_if_needed: true

@@ -1,0 +1,18 @@
+.env
+__pycache__/
+.venv
+.vscode
+collection/
+indexes/
+tmp/
+retrieval/
+data/browsecomp_plus_decrypted.jsonl
+topics-qrels/queries.tsv
+runs/
+evals/.vista_env
+# Secrets: env file with API keys (sourced by run_*.sh)
+.vista_env
+# Stale rollback backups of source files
+*.PREROLLBACK_*
+# Run/debug logs (regenerated each run)
+logs/

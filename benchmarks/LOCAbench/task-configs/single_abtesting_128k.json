@@ -1,0 +1,41 @@
+{
+  "configurations": [
+    {
+      "env_class": "gem.envs.ab_testing_s2l.ab_testing_s2l.ABTestingS2LEnv",
+      "env_params": {
+        "num_scenarios": 2000,
+        "num_days": 365,
+        "seed": 42
+      },
+      "mcp_servers": {
+        "google_cloud": {
+          "type": "google_cloud",
+          "enabled": true,
+          "params": {
+            "data_dir": "{task_workspace}/local_db/google_cloud"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "type": "claim_done",
+          "enabled": true,
+          "params": {}
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        }
+      },
+      "name": "ABTestingS2LEnv"
+    }
+  ]
+}

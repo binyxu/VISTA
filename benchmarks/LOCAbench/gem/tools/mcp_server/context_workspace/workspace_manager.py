@@ -1,0 +1,1986 @@
+"""
+Context Workspace Manager
+
+Shared state between the inference loop and the MCP server via workspace_state.json.
+
+Design: archive = replace in-place with a compact index, not remove.
+  - visible   : full content in context
+  - compressed: index placeholder in context (original stored in state.json)
+  - offloaded : raw tool output replaced by stable harness placeholder
+  - Mixed-level batch archive operates on the lowest listed level and skips higher levels
+  - blocked   : bulk tool result stored outside context
+
+assemble() replaces compressed blocks with [ARCHIVED:Bx Ln] placeholders,
+so the agent always sees the structure of its context — nothing disappears.
+
+Dashboard timing fix: the dashboard is generated AFTER tool results are registered
+(update_dashboard_cache), so it always reflects the latest tool result sizes.
+The cached dashboard is used on the next assemble() call.
+
+Large payloads: archived/offloaded/blocked raw content is stored as external
+payload files and represented in context by compact index blocks.
+"""
+
+import json
+import os
+import re
+import time
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple
+
+PUBLIC_PAYLOAD_DIRECT_MAX_CHARS = 50_000
+PUBLIC_PAYLOAD_CHUNK_MAX_CHARS = 50_000
+PUBLIC_PAYLOAD_CHUNK_MAX_LINES = 2_000
+
+
+def _env_flag(name: str) -> bool:
+    return os.environ.get(name, "").lower() in ("1", "true", "yes", "on")
+
+# ── tiktoken (optional, falls back to char//3 if unavailable) ─────────────────
+try:
+    import tiktoken as _tiktoken
+    _TIKTOKEN_ENC = _tiktoken.get_encoding("cl100k_base")
+    def _tiktoken_count(text: str) -> int:
+        return len(_TIKTOKEN_ENC.encode(str(text), disallowed_special=()))
+except Exception:
+    _tiktoken_count = None  # type: ignore
+
+# ── SimpleSummarizer ──────────────────────────────────────────────────────────
+
+_ERROR_RE = re.compile(
+    r"error|exception|traceback|fail(ed|ure)?|cannot|invalid|undefined", re.I
+)
+_STATUS_RE = re.compile(r"^\s*(exit|return|status|code|result)[:\s]+[-\d]", re.I)
+_KEYWORDS = {
+    "error", "exception", "failed", "function", "class", "def", "return",
+    "log", "request", "response", "config", "route", "handler", "test",
+    "todo", "fix", "current", "final", "decision",
+}
+
+
+def _truncate(text: str, max_words: int) -> str:
+    words = text.split()
+    if len(words) <= max_words:
+        return text
+    return " ".join(words[:max_words]) + "..."
+
+
+def _summarize_bash_output(content: str, max_words: int = 45) -> str:
+    lines = [l.strip() for l in content.splitlines() if l.strip()]
+    if not lines:
+        return ""
+    for line in lines:
+        if _ERROR_RE.search(line):
+            return _truncate(line, max_words)
+    for line in lines:
+        if _STATUS_RE.match(line):
+            return _truncate(line, max_words)
+    for line in reversed(lines):
+        if len(line) > 3:
+            return _truncate(line, max_words)
+    return _truncate(lines[0], max_words)
+
+
+def _summarize_file_read(source: str, content: str, max_words: int = 45) -> str:
+    filename = Path(source).name if source else ""
+    lines = [l.strip() for l in content.splitlines()
+             if l.strip() and not l.strip().startswith("#!") and l.strip() != "---"]
+    snippet = " ".join(lines[:3])
+    prefix = f"{filename}: " if filename else ""
+    return _truncate(prefix + snippet, max_words)
+
+
+def _summarize_assistant_message(content: str, max_words: int = 45) -> str:
+    stripped = re.sub(r"```[\s\S]*?```", "[code]", content)
+    stripped = re.sub(r"`[^`]+`", "[code]", stripped)
+    text = " ".join(stripped.split())
+    code_idx = text.find("[code]")
+    if code_idx > 0:
+        return _truncate(text[:code_idx].rstrip(": "), max_words)
+    m = re.search(r"[.!?]\s", text)
+    candidate = text[:m.start() + 1] if m else text
+    return _truncate(candidate, max_words)
+
+
+def _auto_summary(msg: Dict, block_type: str) -> str:
+    """Type-aware auto-summary."""
+    if block_type == "checkpoint":
+        content = msg.get("content", "")
+        text = content if isinstance(content, str) else str(content)
+        for line in text.splitlines():
+            if line.startswith("Title:"):
+                return _truncate(line.removeprefix("Title:").strip(), 45)
+        return _truncate(" ".join(text.split()), 45)
+
+    if block_type == "tool_call":
+        tool_calls = msg.get("tool_calls", [])
+        if tool_calls:
+            names = [tc.get("function", {}).get("name", "?") for tc in tool_calls[:3]]
+            return f"Call: {', '.join(names)}"
+        return "tool_call"
+
+    if block_type == "tool_result":
+        name = msg.get("name", "tool")
+        content = msg.get("content", "")
+        text = content if isinstance(content, str) else str(content)
+        return f"{name}: {_summarize_bash_output(text, 40)}" if text else name
+
+    if block_type == "assistant_message":
+        content = msg.get("content", "")
+        if isinstance(content, str) and content.strip():
+            return _summarize_assistant_message(content, 45)
+        return "assistant"
+
+    if block_type == "user_message":
+        content = msg.get("content", "")
+        if isinstance(content, str):
+            return _truncate(content, 20)
+        elif isinstance(content, list):
+            for item in content:
+                if isinstance(item, dict) and item.get("type") == "text":
+                    return _truncate(item.get("text", ""), 20)
+        return "user message"
+
+    return ""
+
+
+# ── Content extraction ────────────────────────────────────────────────────────
+
+def _extract_full_content(msg: Dict) -> str:
+    """Extract full text content from a message — no truncation."""
+    content = msg.get("content", "")
+    if isinstance(content, str):
+        return content
+    elif isinstance(content, list):
+        parts = []
+        for item in content:
+            if isinstance(item, dict):
+                parts.append(item.get("text", str(item)))
+            else:
+                parts.append(str(item))
+        return "\n".join(parts)
+    return str(content)
+
+
+def _estimate_tokens(text: str) -> int:
+    """Token estimate: uses tiktoken (cl100k_base) when available,
+    falls back to char//3 (conservative heuristic)."""
+    if _tiktoken_count is not None:
+        return max(1, _tiktoken_count(text))
+    return max(1, len(text) // 3)
+
+
+def count_msg_tokens(msgs: List[Dict], tkt_enc=None) -> int:
+    """Canonical token estimator for a list of messages.
+
+    This is the single source of truth used by all three token-counting
+    subsystems (bulk-output gate, dashboard, trim) so they always agree.
+
+    Count selected fields rather than the full serialized payload. This is
+    closer to Gemini/Venus prompt usage than JSON-serialization counting while
+    still giving dashboard, bulk gate, and trim one shared view.
+    """
+    total = 0
+    for m in msgs:
+        c = m.get("content") or ""
+        if not isinstance(c, str):
+            c = json.dumps(c, ensure_ascii=False)
+        if tkt_enc is not None:
+            total += len(tkt_enc.encode(c, disallowed_special=()))
+        else:
+            total += _estimate_tokens(c)
+        for tc in m.get("tool_calls") or []:
+            fn = tc.get("function") or {}
+            text = (fn.get("name") or "") + (fn.get("arguments") or "")
+            if tkt_enc is not None:
+                total += len(tkt_enc.encode(text, disallowed_special=()))
+            else:
+                total += _estimate_tokens(text)
+        if m.get("name"):
+            if tkt_enc is not None:
+                total += len(tkt_enc.encode(m["name"], disallowed_special=()))
+            else:
+                total += _estimate_tokens(m["name"])
+    return max(0, total)
+
+
+def _estimate_msg_tokens(msg: Dict) -> int:
+    """Estimate tokens for a single message. Delegates to count_msg_tokens."""
+    return max(1, count_msg_tokens([msg]))
+
+
+_INCOMPLETE_TRANSCRIPT_RE = re.compile(
+    r"showing\s+\d+\s+rows|first\s+\d+\s+rows|displaying\s+\d+|"
+    r"total_pages|page_size|truncated|TRUNCATED|next page|has_more|"
+    r"more results|omitted",
+    re.I,
+)
+
+_TOTAL_ROWS_RE = re.compile(r"\bTotal rows:\s*([\d,]+)", re.I)
+_SHOWING_ROWS_RE = re.compile(r"\bResults\s*\(showing\s+([\d,]+)\s+rows\)", re.I)
+
+
+def _partial_rows_info(content: str) -> str:
+    """Return a compact partial-result label if a transcript says so."""
+    text = content or ""
+    total_match = _TOTAL_ROWS_RE.search(text)
+    showing_match = _SHOWING_ROWS_RE.search(text)
+    if not total_match or not showing_match:
+        return ""
+    try:
+        total = int(total_match.group(1).replace(",", ""))
+        showing = int(showing_match.group(1).replace(",", ""))
+    except ValueError:
+        return ""
+    if total > showing:
+        return f"shown rows: {showing:,} / total rows: {total:,}"
+    return ""
+
+
+def _short_json(value, max_chars: int = 320) -> str:
+    """Compact bounded JSON/string rendering for source metadata."""
+    try:
+        if isinstance(value, str):
+            text = value
+        else:
+            text = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    except Exception:
+        text = str(value)
+    text = " ".join(text.split())
+    if len(text) > max_chars:
+        return text[: max(0, max_chars - 3)] + "..."
+    return text
+
+
+def _result_shape_meta(raw_content, max_chars: int = 360) -> str:
+    """Return short, generic result-shape metadata with no task inference."""
+    raw_text = raw_content if isinstance(raw_content, str) else json.dumps(raw_content, ensure_ascii=False)
+    parsed = None
+    if isinstance(raw_content, (list, dict)):
+        parsed = raw_content
+    else:
+        text = raw_text.strip()
+        if text:
+            try:
+                parsed = json.loads(text)
+            except Exception:
+                parsed = None
+
+    parts = []
+    if isinstance(parsed, list):
+        parts.append(f"Result shape: list, returned_items={len(parsed):,}")
+    elif isinstance(parsed, dict):
+        parts.append(f"Result shape: dict, keys={len(parsed):,}")
+        list_fields = [
+            f"{k}={len(v):,}"
+            for k, v in parsed.items()
+            if isinstance(k, str) and isinstance(v, list)
+        ][:4]
+        if list_fields:
+            parts.append("List fields: " + ", ".join(list_fields))
+    else:
+        lines = raw_text.splitlines()
+        parts.append(f"Result shape: text, chars={len(raw_text):,}, lines={len(lines):,}")
+        if lines and "," in lines[0]:
+            parts.append(f"CSV-like header columns={len(lines[0].split(',')):,}")
+
+    meta = "\n".join(parts)
+    if len(meta) > max_chars:
+        meta = meta[: max(0, max_chars - 3)] + "..."
+    return meta
+
+
+def _tool_result_metadata(tool_args, raw_content, max_chars: int = 760) -> str:
+    """Short metadata preserved when a tool result is represented by a placeholder."""
+    lines = []
+    args = _short_json(tool_args, 320)
+    if args:
+        lines.append(f"Args: {args}")
+    shape = _result_shape_meta(raw_content, 360)
+    if shape:
+        lines.append(shape)
+    text = "\n".join(lines)
+    if len(text) > max_chars:
+        text = text[: max(0, max_chars - 3)] + "..."
+    return text
+
+
+def _payload_kind(block_type: str, content: str) -> Tuple[str, bool]:
+    """Classify external payloads for metadata.
+
+    Tool outputs are always transcripts of one tool call, not source-data
+    completeness guarantees. The boolean is retained for compatibility with
+    existing state files and metadata.
+    """
+    if block_type == "tool_result":
+        return "tool transcript", not bool(_INCOMPLETE_TRANSCRIPT_RE.search(content or ""))
+    return "conversation transcript", True
+
+
+# ── WorkspaceManager ──────────────────────────────────────────────────────────
+
+class WorkspaceManager:
+    """Block-level context compression manager.
+
+    Every conversation message → Block with msg_idx.
+    Assistant messages = episode roots; tool results = their children.
+
+    Block states:
+      pinned     — always visible internal status for the initial task message
+      visible    — full content in assembled context
+      compressed — index placeholder in assembled context; original in state.json
+                   compression_level tracks how many times it has been compressed
+      offloaded  — raw tool result automatically kept out of API payload with
+                   a stable placeholder; original remains in state.json for logs
+      deleted    — content intentionally removed; not retrievable
+      blocked    — bulk tool result stored outside context
+
+    Batch archive is clearest when blocks have the same level: L0 raw blocks
+    can be combined into L1 summaries; L1 summaries can be combined into L2
+    summaries. If levels are mixed, archive operates on the lowest listed level
+    and skips higher-level blocks so retrieval/provenance stay clear.
+
+    assemble() replaces compressed blocks with [ARCHIVED:Bx Ln] placeholders
+    so the agent always sees its full context structure.
+
+    Bulk output flow:
+      run_react.py registers oversized tool results as blocked and puts a
+      compact observation in messages (not the real content).
+    """
+
+    def __init__(
+        self,
+        workspace_dir: Path,
+        token_budget: int = 200_000,
+        public_payload_dir: Optional[Path] = None,
+    ):
+        self.workspace_dir = Path(workspace_dir)
+        self.workspace_dir.mkdir(parents=True, exist_ok=True)
+        self.payload_dir = self.workspace_dir / "payloads"
+        self.payload_dir.mkdir(parents=True, exist_ok=True)
+        self.public_payload_dir = Path(public_payload_dir) if public_payload_dir else None
+        if self.public_payload_dir:
+            self.public_payload_dir.mkdir(parents=True, exist_ok=True)
+        self.state_path = self.workspace_dir / "workspace_state.json"
+        self.token_budget = token_budget
+        self._state_cache: Dict | None = None  # in-memory cache to avoid repeated disk reads
+
+    def _public_payload_content(
+        self,
+        block_id: str,
+        content: str,
+        payload_kind: str = "",
+        payload_maybe_complete: bool = True,
+        source_metadata_path: str = "",
+    ) -> str:
+        """Return the agent-visible payload file content."""
+        return content or ""
+
+    def _write_public_payload_manifest(
+        self,
+        block_id: str,
+        content: str,
+        source_metadata_path: str = "",
+    ) -> str:
+        """Expose a large complete payload as bounded chunk files."""
+        assert self.public_payload_dir is not None
+        parts_dir = self.public_payload_dir / f"{block_id}.parts"
+        parts_dir.mkdir(parents=True, exist_ok=True)
+        for stale in parts_dir.glob("part_*.txt"):
+            try:
+                stale.unlink()
+            except Exception:
+                pass
+
+        parts = []
+        lines = content.splitlines(keepends=True)
+        if not lines:
+            lines = [content]
+
+        idx = 0
+        part_no = 1
+        char_pos = 0
+        while idx < len(lines):
+            chunk_lines = []
+            chunk_chars = 0
+            start_line = idx + 1
+            start_char = char_pos
+            while idx < len(lines):
+                line = lines[idx]
+                if (
+                    chunk_lines
+                    and (
+                        len(chunk_lines) >= PUBLIC_PAYLOAD_CHUNK_MAX_LINES
+                        or chunk_chars + len(line) > PUBLIC_PAYLOAD_CHUNK_MAX_CHARS
+                    )
+                ):
+                    break
+                if not chunk_lines and len(line) > PUBLIC_PAYLOAD_CHUNK_MAX_CHARS:
+                    # Very long single-line payload: expose a bounded char slice.
+                    line = line[:PUBLIC_PAYLOAD_CHUNK_MAX_CHARS]
+                    lines[idx] = lines[idx][PUBLIC_PAYLOAD_CHUNK_MAX_CHARS:]
+                    if not lines[idx]:
+                        idx += 1
+                    chunk_lines.append(line)
+                    chunk_chars += len(line)
+                    char_pos += len(line)
+                    break
+                chunk_lines.append(line)
+                chunk_chars += len(line)
+                char_pos += len(line)
+                idx += 1
+
+            part_path = parts_dir / f"part_{part_no:04d}.txt"
+            part_path.write_text("".join(chunk_lines), encoding="utf-8")
+            parts.append({
+                "file": str(part_path),
+                "lines": f"{start_line}-{start_line + max(0, len(chunk_lines) - 1)}",
+                "chars": f"{start_char}-{char_pos}",
+            })
+            part_no += 1
+
+        parts_index = "\n".join(
+            f"- {Path(p['file']).name}: lines {p['lines']}, chars {p['chars']}"
+            for p in parts[:80]
+        )
+        if len(parts) > 80:
+            parts_index += f"\n- ... {len(parts) - 80} more parts in {parts_dir}"
+        source_line = f"Source metadata: {source_metadata_path}\n" if source_metadata_path else ""
+        return (
+            f"[SMS PAYLOAD MANIFEST: {block_id}]\n"
+            "This complete payload is large, so the raw content is stored in bounded chunk files.\n"
+            "Do not read all chunks at once. Search the parts directory or read only the needed part file.\n"
+            f"Parts directory: {parts_dir}\n"
+            f"{source_line}"
+            f"Total parts: {len(parts)}\n"
+            f"Chunk limits: <= {PUBLIC_PAYLOAD_CHUNK_MAX_LINES} lines and <= {PUBLIC_PAYLOAD_CHUNK_MAX_CHARS} chars per part.\n"
+            "Parts:\n"
+            f"{parts_index}\n"
+        )
+
+    def _write_payload(
+        self,
+        block_id: str,
+        content: str,
+        payload_kind: str = "",
+        payload_maybe_complete: bool = True,
+        source_metadata_path: str = "",
+    ) -> Tuple[str, str]:
+        """Persist large/raw block content outside workspace_state.json."""
+        self.payload_dir.mkdir(parents=True, exist_ok=True)
+        path = self.payload_dir / f"{block_id}.txt"
+        path.write_text(content or "", encoding="utf-8")
+        public_path = ""
+        if self.public_payload_dir and not _env_flag("SM_DISABLE_RECOVER"):
+            self.public_payload_dir.mkdir(parents=True, exist_ok=True)
+            public = self.public_payload_dir / f"{block_id}.txt"
+            public.write_text(
+                self._public_payload_content(
+                    block_id,
+                    content,
+                    payload_kind,
+                    payload_maybe_complete,
+                    source_metadata_path,
+                ),
+                encoding="utf-8",
+            )
+            public_path = str(public)
+        return str(path.relative_to(self.workspace_dir)), public_path
+
+    def _write_source_metadata(self, block_id: str, metadata: Dict) -> Tuple[str, str]:
+        """Persist the source access path for an external payload."""
+        self.payload_dir.mkdir(parents=True, exist_ok=True)
+        path = self.payload_dir / f"{block_id}.source.json"
+        path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
+        public_path = ""
+        if self.public_payload_dir and not _env_flag("SM_DISABLE_RECOVER"):
+            self.public_payload_dir.mkdir(parents=True, exist_ok=True)
+            public = self.public_payload_dir / f"{block_id}.source.json"
+            public.write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
+            public_path = str(public)
+        return str(path.relative_to(self.workspace_dir)), public_path
+
+    def _set_tool_source(
+        self,
+        state: Dict,
+        block: Dict,
+        tool_name: str,
+        tool_arguments,
+        tool_call_id: str = "",
+    ) -> None:
+        """Attach the source tool call for a tool-result payload."""
+        if not block or block.get("type") != "tool_result":
+            return
+        payload_kind = block.get("payload_kind") or "tool transcript"
+        maybe_complete = bool(block.get("payload_maybe_complete", True))
+        metadata = {
+            "block_id": block.get("id"),
+            "payload_kind": payload_kind,
+            "payload_maybe_complete": maybe_complete,
+            "source_kind": "tool_call",
+            "source_tool_name": tool_name or "tool",
+            "source_tool_arguments": tool_arguments if tool_arguments is not None else "",
+            "source_tool_call_id": tool_call_id or "",
+            "guidance": (
+                "This payload stores only the transcript returned by this tool call, not a guarantee of "
+                "complete source data. Use the source tool again if the transcript indicates omitted, "
+                "shown, paged, or truncated data."
+            ),
+        }
+        source_path, public_source_path = self._write_source_metadata(block["id"], metadata)
+        block["source_kind"] = "tool_call"
+        block["source_tool_name"] = tool_name or "tool"
+        block["source_tool_arguments"] = tool_arguments if tool_arguments is not None else ""
+        block["source_tool_call_id"] = tool_call_id or ""
+        block["source_metadata_path"] = source_path
+        if public_source_path:
+            block["public_source_metadata_path"] = public_source_path
+            if block.get("public_payload_path"):
+                try:
+                    raw = (self.workspace_dir / block["payload_path"]).read_text(encoding="utf-8")
+                except Exception:
+                    raw = block.get("content", "")
+                Path(block["public_payload_path"]).write_text(
+                    self._public_payload_content(
+                        block["id"],
+                        raw,
+                        payload_kind,
+                        maybe_complete,
+                        public_source_path,
+                    ),
+                    encoding="utf-8",
+                )
+        else:
+            block.pop("public_source_metadata_path", None)
+        obs = state.setdefault("temporary_observations", {}).setdefault(block["id"], {
+            "block_id": block["id"],
+        })
+        obs["source_tool_name"] = block["source_tool_name"]
+        obs["public_source_metadata_path"] = block.get("public_source_metadata_path", "")
+
+    # ── Persistence ──────────────────────────────────────────────────────────
+
+    def _load(self) -> Dict:
+        if self._state_cache is not None:
+            return self._state_cache
+        if self.state_path.exists():
+            try:
+                self._state_cache = json.loads(self.state_path.read_text())
+                return self._state_cache
+            except Exception:
+                pass
+        self._state_cache = {
+            "blocks": {},
+            "next_id": 1,
+            "current_episode_id": None,
+            "token_budget": self.token_budget,
+            # tiktoken count of fixed overhead (tools definitions), set once at init
+            "overhead_tokens": 0,
+            "dashboard_tokens": 0,
+            # dashboard cached after tool results are registered each step
+            "dashboard_cache": None,
+            "usage_history": [],
+            "archive_groups": {},
+            "next_archive_group_id": 1,
+            "temporary_observations": {},
+        }
+        return self._state_cache
+
+    def _save(self, state: Dict):
+        self._state_cache = state
+        self.workspace_dir.mkdir(parents=True, exist_ok=True)
+        self.state_path.write_text(json.dumps(state, indent=2))
+
+    # ── Block classification ──────────────────────────────────────────────────
+
+    def _classify(self, msg: Dict) -> str:
+        role = msg.get("role", "")
+        if role == "user":
+            return "user_message"
+        elif role == "assistant":
+            return "tool_call" if msg.get("tool_calls") else "assistant_message"
+        elif role == "tool":
+            content = msg.get("content", "")
+            if isinstance(content, str) and content.startswith("[CHECKPOINT]"):
+                return "checkpoint"
+            return "tool_result"
+        return "message"
+
+    # ── Core: register ────────────────────────────────────────────────────────
+
+    def register_message(self, msg: Dict, msg_idx: int, blocked: bool = False) -> str:
+        """Register a conversation message as a block. Returns block_id.
+
+        Args:
+            msg: The message dict.
+            msg_idx: Position in the messages list.
+            blocked: If True, register as a blocked bulk result (not admitted
+                     to context). The observation message's msg_idx should be
+                     registered separately as a normal visible block.
+        """
+        state = self._load()
+
+        block_id = f"B{state['next_id']}"
+        state["next_id"] += 1
+
+        block_type = self._classify(msg)
+        summary = _auto_summary(msg, block_type)
+
+        payload_path = None
+        content_len = 0
+        if blocked:
+            status = "blocked"
+            # Blocked blocks keep full content for logs/offline inspection.
+            raw_content = _extract_full_content(msg)
+            content_len = len(raw_content)
+        elif msg_idx == 0:
+            status = "pinned"
+            raw_content = _extract_full_content(msg)
+            content_len = len(raw_content)
+        else:
+            status = "visible"
+            # Store full content for visible blocks too. archive is served
+            # by the MCP server process, which cannot see the runner's in-memory
+            # messages[] list after a block is compressed.
+            raw_content = _extract_full_content(msg)
+            content_len = len(raw_content)
+
+        payload_kind, payload_maybe_complete = _payload_kind(block_type, raw_content)
+        payload_partial_info = _partial_rows_info(raw_content) if payload_path or blocked else ""
+        if blocked:
+            payload_path, public_payload_path = self._write_payload(
+                block_id,
+                raw_content,
+                payload_kind,
+                payload_maybe_complete,
+            )
+            content = ""
+        else:
+            public_payload_path = ""
+            content = raw_content
+
+        if msg_idx == 0:
+            parent_id = None
+            state["current_episode_id"] = block_id
+        elif block_type in ("tool_call", "assistant_message"):
+            parent_id = None
+            state["current_episode_id"] = block_id
+        elif block_type == "checkpoint":
+            parent_id = state.get("current_episode_id")
+        else:
+            parent_id = state.get("current_episode_id")
+
+        state["blocks"][block_id] = {
+            "id": block_id,
+            "type": block_type,
+            "content": content,
+            "payload_path": payload_path,
+            "public_payload_path": public_payload_path,
+            "payload_kind": payload_kind if payload_path else "",
+            "payload_maybe_complete": payload_maybe_complete if payload_path else True,
+            "payload_partial_info": payload_partial_info if payload_path else "",
+            "content_len": content_len,
+            "summary": summary,
+            "status": status,
+            "msg_idx": msg_idx,
+            "parent_id": parent_id,
+            "created_at": time.time(),
+            # Serialized message estimate — matches run_react.py trimmer logic.
+            "tiktoken_tokens": _estimate_msg_tokens(msg),
+            # For blocked blocks: msg_idx of the observation message in messages list.
+            "notify_msg_idx": None,
+        }
+
+        if blocked:
+            obs = state.setdefault("temporary_observations", {}).setdefault(block_id, {
+                "block_id": block_id,
+            })
+            obs["summary"] = summary
+            obs["status"] = status
+            obs["last_seen_at"] = time.time()
+            obs["external_payload"] = True
+
+        if block_type == "checkpoint":
+            sources = state.pop("pending_checkpoint_sources", [])
+            if sources:
+                state["blocks"][block_id]["source_blocks"] = sources
+                now = time.time()
+                for bid in sources:
+                    obs = state.setdefault("temporary_observations", {}).setdefault(bid, {
+                        "block_id": bid,
+                        "summary": state.get("blocks", {}).get(bid, {}).get("summary", ""),
+                    })
+                    obs["promoted_at"] = now
+                    obs["promoted_by"] = block_id
+
+        self._save(state)
+        return block_id
+
+    def set_notify_msg_idx(self, block_id: str, notify_msg_idx: int):
+        """Record which messages[] index holds the observation for a blocked block."""
+        state = self._load()
+        if block_id in state["blocks"]:
+            state["blocks"][block_id]["notify_msg_idx"] = notify_msg_idx
+            self._save(state)
+
+    def set_tool_source(
+        self,
+        block_id: str,
+        tool_name: str,
+        tool_arguments=None,
+        tool_call_id: str = "",
+    ):
+        """Record the source tool call for an external tool-result payload."""
+        state = self._load()
+        block = state.get("blocks", {}).get(block_id)
+        if block:
+            self._set_tool_source(state, block, tool_name, tool_arguments, tool_call_id)
+            self._save(state)
+
+    def conv_tokens(self, messages: List[Dict], tkt_enc=None) -> int:
+        """Return the token count for the assembled version of messages.
+
+        This is the canonical way for the bulk-output gate (and any other caller)
+        to measure how many tokens the conversation currently occupies in the
+        context window — identical to what the API will actually receive.
+
+        Assembles messages first (replacing compressed blocks with summary
+        placeholders), then counts via count_msg_tokens so the estimate
+        matches both the trim function and the dashboard display exactly.
+        """
+        return count_msg_tokens(self.assemble(messages), tkt_enc)
+
+
+    # ── Core: assemble ────────────────────────────────────────────────────────
+
+    def assemble(self, all_messages: List[Dict]) -> List[Dict]:
+        """Build the message list to send to the LLM.
+
+        - compressed blocks → [ARCHIVED:Bx Ln] placeholders
+        - offloaded blocks  → stable [OFFLOADED:Bx] placeholders
+        - blocked blocks    → observation message stays as-is
+        - deleted blocks    → omitted from assembled context
+        """
+        state = self._load()
+
+        idx_to_block = {b["msg_idx"]: b for b in state["blocks"].values()}
+        # Also map notify_msg_idx → block for blocked/legacy handling
+        notify_idx_to_block = {
+            b["notify_msg_idx"]: b
+            for b in state["blocks"].values()
+            if b.get("notify_msg_idx") is not None
+        }
+
+        result: List[Dict] = []
+
+        # ── Compact group folding ────────────────────────────────────────────
+        # Collapse a *contiguous* run of compressed blocks that belong to the
+        # same archive group into ONE placeholder. We keep the id span (so the
+        # agent can still recover any member by id) and emit it at the run's
+        # original stream position, so temporal order is preserved exactly — a
+        # folded marker still sits between the same neighbours its members did.
+        # Only contiguous same-group runs are folded; a visible block (or a
+        # different group) in the middle splits the run, so ordering is never
+        # scrambled. Disabled unless SM_COMPACT_ARCHIVE is set.
+        fold_start: Dict[int, Dict] = {}
+        fold_skip = set()
+        if _env_flag("SM_COMPACT_ARCHIVE"):
+            _groups_meta = state.get("archive_groups", {}) or {}
+            _n = len(all_messages)
+            _i = 0
+            while _i < _n:
+                _b = idx_to_block.get(_i)
+                _gid = _b.get("archive_group_id") if _b else None
+                if _b and _b.get("status") == "compressed" and _gid:
+                    _j = _i
+                    _run = []
+                    while _j < _n:
+                        _bj = idx_to_block.get(_j)
+                        if (_bj and _bj.get("status") == "compressed"
+                                and _bj.get("archive_group_id") == _gid):
+                            _run.append(_bj)
+                            _j += 1
+                        else:
+                            break
+                    if len(_run) >= 2:
+                        _ids = [b["id"] for b in _run]
+                        _rep = (_groups_meta.get(_gid, {}) or {}).get("replacement", "") or ""
+                        if not _rep:
+                            _rep = " | ".join(
+                                s for s in (b.get("summary", "") for b in _run) if s
+                            )[:300]
+                        fold_start[_i] = {
+                            "gid": _gid,
+                            "ids": _ids,
+                            "level": _run[0].get("compression_level", 1),
+                            "tokens": sum((b.get("tiktoken_tokens") or 0) for b in _run),
+                            "replacement": _rep,
+                        }
+                        for _k in range(_i + 1, _j):
+                            fold_skip.add(_k)
+                        _i = _j
+                        continue
+                _i += 1
+
+        def _parent_accepts_tool_role(block: Dict) -> bool:
+            parent_id = block.get("parent_id") if block else None
+            if not parent_id:
+                return True
+            parent = state["blocks"].get(parent_id, {})
+            return parent.get("status") in ("visible", "pinned")
+
+        def _as_user_context(prefix: str, content: object) -> Dict:
+            if not isinstance(content, str):
+                content = json.dumps(content, ensure_ascii=False)
+            return {
+                "role": "user",
+                "content": f"{prefix}\n{content}",
+            }
+
+        def _archived_placeholder(block: Dict, msg: Dict) -> str:
+            level = block.get("compression_level", 1)
+            summary = "" if _env_flag("SM_ARCHIVE_PLACEHOLDER_ONLY") else block.get("summary", "")
+            bid = block["id"]
+            if _env_flag("SM_ARCHIVE_ORIGINAL_PLACEHOLDER"):
+                return f"[ARCHIVED:{bid} L{level}]" + (f" {summary}" if summary else "")
+
+            if _env_flag("SM_COMPACT_ARCHIVE"):
+                # Compact single-line in-place marker. Kept at its original stream
+                # position (position == temporal order) and never merged with the
+                # neighbouring markers, so the agent still sees exactly what each
+                # archived block sat *between*. Keeps id (ordering anchor) + type +
+                # original size + tool args + summary; drops fields that are
+                # redundant with the message envelope (role), the protocol
+                # (recoverable), or the dashboard (status), and the per-field labels.
+                c_btype = block.get("type", "") or "message"
+                c_tokens = block.get("tiktoken_tokens", "")
+                head = f"[ARCHIVED:{bid} L{level} {c_btype}"
+                if c_tokens != "":
+                    head += f" ~{c_tokens}t"
+                head += "]"
+                c_name = block.get("source_tool_name", "")
+                c_args = block.get("source_tool_arguments", "")
+                detail = ""
+                if c_name:
+                    detail = c_name + (f"({_short_json(c_args, 320)})" if c_args not in ("", None) else "")
+                elif c_btype == "tool_call":
+                    tcs = msg.get("tool_calls") or []
+                    parts = []
+                    for tc in tcs[:5]:
+                        fn = tc.get("function", {}) if isinstance(tc, dict) else {}
+                        parts.append(f"{fn.get('name', 'tool')}({_short_json(fn.get('arguments', ''), 320)})")
+                    detail = "; ".join(parts)
+                tail = f" :: {summary}" if summary else ""
+                body = f"{head} {detail}{tail}" if detail else f"{head}{tail}"
+                return body.rstrip()
+
+            btype = block.get("type", "") or "message"
+            role = msg.get("role", "")
+            tokens = block.get("tiktoken_tokens", "")
+            lines = [
+                f"[ARCHIVED:{bid} L{level}]",
+                f"type: {btype}",
+            ]
+            if role:
+                lines.append(f"role: {role}")
+
+            source_name = block.get("source_tool_name", "")
+            source_args = block.get("source_tool_arguments", "")
+            if source_name:
+                lines.append(f"tool_name: {source_name}")
+                if source_args not in ("", None):
+                    lines.append(f"tool_args: {_short_json(source_args, 500)}")
+            elif btype == "tool_call":
+                tool_calls = msg.get("tool_calls") or []
+                rendered = []
+                for tc in tool_calls[:5]:
+                    fn = tc.get("function", {}) if isinstance(tc, dict) else {}
+                    name = fn.get("name", "tool")
+                    args = fn.get("arguments", "")
+                    rendered.append(f"{name}({_short_json(args, 500)})")
+                if rendered:
+                    lines.append("tool_calls: " + "; ".join(rendered))
+
+            if tokens != "":
+                lines.append(f"tokens_before: {tokens}")
+            lines.append("recoverable: yes" if not _env_flag("SM_DISABLE_RECOVER") else "recoverable: no")
+            if summary:
+                lines.append(f"index: {summary}")
+            return "\n".join(lines)
+
+        for i, msg in enumerate(all_messages):
+            # Group folding: members after the first are dropped; the first
+            # emits one compact group marker covering the whole contiguous run.
+            if i in fold_skip:
+                continue
+            if i in fold_start:
+                _fi = fold_start[i]
+                _ids = _fi["ids"]
+                _span = f"{_ids[0]}–{_ids[-1]}" if len(_ids) > 1 else _ids[0]
+                _gt = (f"[ARCHIVED:{_fi['gid']} L{_fi['level']} "
+                       f"({_span}, {len(_ids)} blocks) ~{_fi['tokens']}t]")
+                if _fi["replacement"]:
+                    _gt += f" :: {_fi['replacement']}"
+                result.append({"role": "user", "content": _gt})
+                continue
+
+            block = idx_to_block.get(i)
+            status = block["status"] if block else "visible"
+
+            # Check if this message is an observation for a blocked/legacy block
+            notify_block = notify_idx_to_block.get(i)
+            if notify_block is not None:
+                nb_status = notify_block["status"]
+                parent_id = notify_block.get("parent_id")
+                parent_status = state["blocks"].get(parent_id, {}).get("status", "visible") if parent_id else "visible"
+                placeholder_role = msg.get("role", "tool")
+                placeholder_tool_call_id = msg.get("tool_call_id", "")
+                if parent_status not in ("visible", "pinned"):
+                    # Once the assistant tool-call block is compressed, any
+                    # surviving tool-role notification becomes an orphan from
+                    # the API's perspective. These placeholders are only
+                    # bookkeeping, so render them as plain context.
+                    placeholder_role = "user"
+                    placeholder_tool_call_id = ""
+                if nb_status in ("blocked", "pending"):
+                    # Still blocked: keep observation message as-is
+                    if parent_status not in ("visible", "pinned"):
+                        result.append({
+                            "role": "user",
+                            "content": msg.get("content", ""),
+                        })
+                    else:
+                        result.append(msg)
+                    continue
+                elif nb_status == "consumed":
+                    # Legacy flow: content was delivered in a tool response.
+                    # Replace notification with tiny placeholder.
+                    placeholder = {
+                        "role": placeholder_role,
+                        "content": f"[CONSUMED:{notify_block['id']}]",
+                    }
+                    if placeholder_tool_call_id:
+                        placeholder["tool_call_id"] = placeholder_tool_call_id
+                    result.append(placeholder)
+                    continue
+                elif nb_status == "deleted":
+                    placeholder = {
+                        "role": placeholder_role,
+                        "content": f"[DELETED:{notify_block['id']}] Content permanently removed.",
+                    }
+                    if placeholder_tool_call_id:
+                        placeholder["tool_call_id"] = placeholder_tool_call_id
+                    result.append(placeholder)
+                    continue
+                elif nb_status in ("deferred", "discarded"):
+                    # Legacy compatibility: older runs used "deferred" for a
+                    # too-large result left outside context.
+                    placeholder = {
+                        "role": placeholder_role,
+                        "content": f"[BLOCKED_BULK_OUTPUT:{notify_block['id']}] Stored outside context. Rerun the source tool with narrower filters, limits, or projections if details are needed.",
+                    }
+                    if placeholder_tool_call_id:
+                        placeholder["tool_call_id"] = placeholder_tool_call_id
+                    result.append(placeholder)
+                    continue
+                # fallthrough for other statuses
+
+            if status in ("visible", "pinned"):
+                if block and block.get("type") == "checkpoint":
+                    if not _parent_accepts_tool_role(block):
+                        result.append(_as_user_context(
+                            f"[{block.get('type', 'BLOCK').upper()}:{block['id']}]",
+                            msg.get("content", ""),
+                        ))
+                        continue
+                if block and block.get("type") == "tool_result":
+                    if not _parent_accepts_tool_role(block):
+                        result.append(_as_user_context(
+                            f"[VISIBLE:{block['id']}] Tool result content kept exact:",
+                            msg.get("content", ""),
+                        ))
+                        continue
+                result.append(msg)
+                continue
+
+            if status == "deleted":
+                if block and block.get("type") == "tool_result":
+                    if _parent_accepts_tool_role(block):
+                        # Keep a tiny structural tool response so assistant tool_calls
+                        # remain protocol-valid, while deleted content stays unrecoverable.
+                        result.append({**msg, "content": f"[DELETED:{block['id']}] Content permanently removed."})
+                continue
+
+            if status == "offloaded":
+                summary = block.get("summary", "")
+                meta = block.get("offloaded_metadata", "")
+                meta_text = f" {meta.replace(chr(10), ' ')}" if meta else ""
+                placeholder = (
+                    f"[OFFLOADED:{block['id']}] large tool result, "
+                    f"~{block.get('tiktoken_tokens', '?')} tokens.{meta_text} {summary}"
+                )
+                if block and block.get("type") == "tool_result" and _parent_accepts_tool_role(block):
+                    result.append({**msg, "content": placeholder})
+                else:
+                    result.append({
+                        "role": "user",
+                        "content": placeholder,
+                    })
+                continue
+
+            if status in ("blocked", "pending", "deferred", "discarded"):
+                # The blocked block's real content is NOT in messages (observation is).
+                # The observation message is handled above via notify_idx_to_block.
+                # If we somehow encounter the blocked/deleted block's own msg_idx here, skip it.
+                continue
+
+            if status == "compressed":
+                placeholder = _archived_placeholder(block, msg)
+                btype = block.get("type", "")
+
+                if btype in ("tool_call", "assistant_message"):
+                    result.append({
+                        "role": "assistant",
+                        "content": placeholder,
+                    })
+                elif btype == "checkpoint":
+                    result.append({
+                        "role": "user",
+                        "content": placeholder,
+                    })
+                elif btype == "tool_result":
+                    if not _parent_accepts_tool_role(block):
+                        result.append({
+                            "role": "user",
+                            "content": placeholder,
+                        })
+                    else:
+                        result.append({**msg, "content": placeholder})
+                else:
+                    result.append({
+                        "role": "user",
+                        "content": placeholder,
+                    })
+
+        # Keep only most recent workspace-only turn
+        _WS_PREFIX = "context_workspace_"
+
+        def _is_workspace_only(msg: Dict) -> bool:
+            tcs = msg.get("tool_calls", [])
+            return bool(tcs) and all(
+                tc.get("function", {}).get("name", "").startswith(_WS_PREFIX)
+                for tc in tcs
+            )
+
+        ws_positions = [
+            pos for pos, msg in enumerate(result)
+            if msg.get("role") == "assistant" and _is_workspace_only(msg)
+        ]
+        if len(ws_positions) > 1:
+            stale_tc_ids: set = set()
+            stale_pos: set = set(ws_positions[:-1])
+            for pos in ws_positions[:-1]:
+                for tc in result[pos].get("tool_calls", []):
+                    tid = tc.get("id")
+                    if tid:
+                        stale_tc_ids.add(tid)
+            checkpoint_tool_ids = {
+                all_messages[b["msg_idx"]].get("tool_call_id")
+                for b in state["blocks"].values()
+                if b.get("type") == "checkpoint"
+                and isinstance(b.get("msg_idx"), int)
+                and b["msg_idx"] < len(all_messages)
+            }
+            for pos, msg in enumerate(result):
+                if msg.get("role") == "tool" and msg.get("tool_call_id") in stale_tc_ids:
+                    if msg.get("tool_call_id") in checkpoint_tool_ids:
+                        result[pos] = {
+                            "role": "user",
+                            "content": msg.get("content", ""),
+                        }
+                    else:
+                        stale_pos.add(pos)
+            result = [msg for pos, msg in enumerate(result) if pos not in stale_pos]
+
+        # Fix consecutive assistant messages
+        fixed: List[Dict] = []
+        for msg in result:
+            if fixed and fixed[-1].get("role") == "assistant" and msg.get("role") == "assistant":
+                fixed.append({"role": "user", "content": "[context: compressed]"})
+            fixed.append(msg)
+        if fixed and fixed[-1].get("role") == "assistant":
+            fixed.append({"role": "user", "content": "[context: compressed]"})
+
+        # Final protocol guard: API payloads must contain complete tool-call
+        # turns. Gemini rejects a payload when an assistant message has N
+        # tool_calls but the immediately following tool response parts are not
+        # exactly those N ids. Context assembly can preserve useful pieces of an
+        # old tool-call turn after other pieces were archived, deleted, or
+        # converted to user context. In that case the old turn is no longer a
+        # protocol-level tool call; keep it only as plain context.
+        def _tool_call_text(msg: Dict) -> str:
+            parts = []
+            for tc in msg.get("tool_calls") or []:
+                fn = tc.get("function") or {}
+                name = fn.get("name") or "tool"
+                args = fn.get("arguments") or ""
+                if not isinstance(args, str):
+                    args = json.dumps(args, ensure_ascii=False)
+                parts.append(f"- {name}({args[:500]})")
+            body = msg.get("content") or ""
+            if body:
+                return f"{body}\n\n[TOOL_CALL_CONTEXT]\n" + "\n".join(parts)
+            return "[TOOL_CALL_CONTEXT]\n" + "\n".join(parts)
+
+        protocol_safe: List[Dict] = []
+        live_tool_call_ids: set[str] = set()
+        i = 0
+        while i < len(fixed):
+            msg = fixed[i]
+
+            if msg.get("role") == "assistant" and msg.get("tool_calls"):
+                expected = [
+                    tc.get("id")
+                    for tc in (msg.get("tool_calls") or [])
+                    if tc.get("id")
+                ]
+                j = i + 1
+                got = []
+                while j < len(fixed) and fixed[j].get("role") == "tool":
+                    got.append(fixed[j].get("tool_call_id"))
+                    j += 1
+
+                if expected and got == expected:
+                    for tid in expected:
+                        live_tool_call_ids.add(tid)
+                    protocol_safe.append(msg)
+                else:
+                    protocol_safe.append({
+                        "role": "user",
+                        "content": _tool_call_text(msg),
+                    })
+                i += 1
+                continue
+
+            if msg.get("role") == "tool":
+                tid = msg.get("tool_call_id")
+                if tid not in live_tool_call_ids:
+                    content = msg.get("content", "")
+                    if not isinstance(content, str):
+                        content = json.dumps(content, ensure_ascii=False)
+                    protocol_safe.append({
+                        "role": "user",
+                        "content": f"[ORPHANED_TOOL_RESULT:{tid}]\n{content}",
+                    })
+                    i += 1
+                    continue
+
+            protocol_safe.append(msg)
+            i += 1
+
+        return protocol_safe
+
+    def preflight_offload_raw_tool_results(
+        self,
+        messages: List[Dict],
+        target_conv_tokens: int,
+        tkt_enc=None,
+        policy: str = "largest",
+    ) -> int:
+        """Offload visible raw blocks until assembled context fits.
+
+        This is a deterministic wire-payload hygiene pass, modeled after
+        Claude Code's large tool-result replacement. It is not semantic archive:
+        it only replaces raw tool output with a stable placeholder and leaves
+        user task text, checkpoints, and agent-created summaries alone.
+
+        Returns the number of newly offloaded blocks.
+        """
+        state = self._load()
+        if target_conv_tokens <= 0:
+            return 0
+
+        current = self.conv_tokens(messages, tkt_enc)
+        if current <= target_conv_tokens:
+            return 0
+
+        def _source_for_tool_result(b: Dict):
+            if b.get("type") != "tool_result":
+                return None
+            idx = b.get("msg_idx")
+            if not isinstance(idx, int) or idx < 0 or idx >= len(messages):
+                return None
+            tc_id = messages[idx].get("tool_call_id")
+            if not tc_id:
+                return None
+            for msg in reversed(messages[:idx]):
+                if msg.get("role") != "assistant":
+                    continue
+                for tc in msg.get("tool_calls") or []:
+                    if tc.get("id") != tc_id:
+                        continue
+                    fn = tc.get("function") or {}
+                    raw_args = fn.get("arguments") or ""
+                    try:
+                        args = json.loads(raw_args) if isinstance(raw_args, str) else raw_args
+                    except Exception:
+                        args = raw_args
+                    return fn.get("name", "tool"), args, tc_id
+            return None
+
+        def _is_raw_tool_candidate(b: Dict) -> bool:
+            if b.get("status") != "visible":
+                return False
+            if b.get("type") != "tool_result":
+                return False
+            idx = b.get("msg_idx")
+            if not isinstance(idx, int) or idx < 0 or idx >= len(messages):
+                return False
+            content = b.get("content", "")
+            if not isinstance(content, str):
+                content = str(content)
+            internal_prefixes = (
+                "[RESULT OMITTED:",
+                "[RESULT OUTSIDE CONTEXT:",
+                "[TOOL RESPONSE OUTSIDE CONTEXT]",
+                "[PARTIAL TOOL RESPONSE OUTSIDE CONTEXT]",
+                "[TOOL TRANSCRIPT OUTSIDE CONTEXT]",
+                "[DUPLICATE TOOL TRANSCRIPT OUTSIDE CONTEXT]",
+                "[CLAIM_DONE_DEFERRED]",
+                "[Tool execution blocked:",
+            )
+            return not content.startswith(internal_prefixes)
+
+        def _is_oldest_candidate(b: Dict) -> bool:
+            if b.get("status") != "visible":
+                return False
+            if b.get("type") == "user_message" and b.get("status") == "pinned":
+                return False
+            idx = b.get("msg_idx")
+            if not isinstance(idx, int) or idx < 0 or idx >= len(messages):
+                return False
+            content = b.get("content", "")
+            if not isinstance(content, str):
+                content = str(content)
+            return bool(content) and not _is_noise_content(content)
+
+        def _is_noise_content(content: str) -> bool:
+            internal_prefixes = (
+                "[RESULT OMITTED:",
+                "[RESULT OUTSIDE CONTEXT:",
+                "[TOOL RESPONSE OUTSIDE CONTEXT]",
+                "[PARTIAL TOOL RESPONSE OUTSIDE CONTEXT]",
+                "[TOOL TRANSCRIPT OUTSIDE CONTEXT]",
+                "[DUPLICATE TOOL TRANSCRIPT OUTSIDE CONTEXT]",
+                "[CLAIM_DONE_DEFERRED]",
+                "[Tool execution blocked:",
+                "[CONTEXT_LIMIT_REJECTED]",
+            )
+            return content.startswith(internal_prefixes)
+
+        if policy == "oldest":
+            candidates = [
+                b for b in state["blocks"].values()
+                if _is_oldest_candidate(b)
+            ]
+            candidates.sort(
+                key=lambda b: (
+                    b.get("created_at", 0),
+                    b.get("msg_idx", 0),
+                )
+            )
+        else:
+            candidates = [
+                b for b in state["blocks"].values()
+                if _is_raw_tool_candidate(b)
+            ]
+            candidates.sort(
+                key=lambda b: (b.get("tiktoken_tokens") or _estimate_tokens(b.get("content", "")), b.get("created_at", 0)),
+                reverse=True,
+            )
+
+        changed = 0
+        for b in candidates:
+            if current <= target_conv_tokens:
+                break
+            original_tokens = b.get("tiktoken_tokens") or _estimate_tokens(b.get("content", ""))
+            summary = b.get("summary") or _truncate(" ".join(str(b.get("content", "")).split()), 30)
+            source = _source_for_tool_result(b)
+            source_args = source[1] if source else ""
+            meta = _tool_result_metadata(source_args, b.get("content", ""))
+            meta_text = f" {meta.replace(chr(10), ' ')}" if meta else ""
+            if policy == "oldest":
+                placeholder = (
+                    f"[OFFLOADED:{b['id']}] fixed-policy archived block, "
+                    f"~{original_tokens} tokens. {summary}"
+                )
+            else:
+                placeholder = (
+                    f"[OFFLOADED:{b['id']}] large tool result, "
+                    f"~{original_tokens} tokens.{meta_text} {summary}"
+                )
+            placeholder_tokens = _estimate_tokens(placeholder)
+            b["status"] = "offloaded"
+            b["summary"] = summary
+            b["offloaded_metadata"] = meta
+            content = b.get("content", "")
+            if content and not b.get("payload_path"):
+                payload_kind, payload_maybe_complete = _payload_kind(b.get("type", ""), content)
+                payload_path, public_payload_path = self._write_payload(
+                    b["id"],
+                    content,
+                    payload_kind,
+                    payload_maybe_complete,
+                    b.get("public_source_metadata_path", ""),
+                )
+                b["payload_path"] = payload_path
+                if public_payload_path:
+                    b["public_payload_path"] = public_payload_path
+                else:
+                    b.pop("public_payload_path", None)
+                b["payload_kind"] = payload_kind
+                b["payload_maybe_complete"] = payload_maybe_complete
+                b["content_len"] = len(content)
+                b["content"] = ""
+            if source:
+                self._set_tool_source(state, b, source[0], source[1], source[2])
+            b["offloaded_at"] = time.time()
+            b["offloaded_placeholder_tokens"] = placeholder_tokens
+            obs = state.setdefault("temporary_observations", {}).setdefault(b["id"], {
+                "block_id": b["id"],
+                "summary": summary,
+            })
+            obs["summary"] = summary
+            obs["status"] = "offloaded"
+            obs["offloaded_at"] = b["offloaded_at"]
+            obs["last_seen_at"] = b["offloaded_at"]
+            current -= max(1, original_tokens - placeholder_tokens)
+            changed += 1
+
+        if changed:
+            self._save(state)
+            self.update_dashboard_cache()
+        return changed
+
+    # ── Dashboard ─────────────────────────────────────────────────────────────
+
+    def set_overhead(self, overhead_tokens: int):
+        """Store fixed overhead (tools definitions tiktoken count), called once at init."""
+        state = self._load()
+        state["overhead_tokens"] = overhead_tokens
+        self._save(state)
+
+    def update_dashboard_cache(self):
+        """Recompute and cache the dashboard AFTER tool results are registered."""
+        state = self._load()
+        first_pass = self._render_dashboard(state)
+        dashboard_tokens = count_msg_tokens([{
+            "role": "user",
+            "content": f"<context_workspace_status>\n{first_pass}\n</context_workspace_status>",
+        }])
+        state["dashboard_tokens"] = dashboard_tokens
+        _, metrics = self._render_dashboard(state, return_metrics=True)
+        history = []
+        for item in list(state.get("usage_history", [])):
+            if isinstance(item, dict):
+                history.append(item)
+            else:
+                history.append({"pct": int(item), "total": None, "savings": None})
+        history.append({
+            "pct": metrics["pct"],
+            "total": metrics["total_tokens"],
+            "savings": metrics["managed_savings"],
+        })
+        state["usage_history"] = history[-5:]
+        dashboard = self._render_dashboard(state)
+        final_dashboard_tokens = count_msg_tokens([{
+            "role": "user",
+            "content": f"<context_workspace_status>\n{dashboard}\n</context_workspace_status>",
+        }])
+        if final_dashboard_tokens != state.get("dashboard_tokens"):
+            state["dashboard_tokens"] = final_dashboard_tokens
+            dashboard = self._render_dashboard(state)
+        state["dashboard_cache"] = dashboard
+        self._save(state)
+
+    def get_dashboard(self) -> str:
+        """Return the cached dashboard. Falls back to fresh render on first step."""
+        state = self._load()
+        cached = state.get("dashboard_cache")
+        if cached:
+            return cached
+        return self._render_dashboard(state)
+
+    def get_blocked_blocks(self) -> List[Dict]:
+        """Return all blocked bulk-output blocks sorted by creation time."""
+        state = self._load()
+        return sorted(
+            [b for b in state["blocks"].values() if b["status"] in ("blocked", "pending")],
+            key=lambda b: b.get("created_at", 0)
+        )
+
+
+    def _render_dashboard(self, state: Dict, return_metrics: bool = False):
+        """Render a compact meta dashboard.
+
+        The dashboard is a context map, not an instruction sheet. Semantic
+        content stays in the conversation blocks; this view exposes IDs,
+        status, size, type, and grouping metadata.
+        """
+        if _env_flag("SM_BETTER_DASHBOARD"):
+            return self._render_better_dashboard(state, return_metrics=return_metrics)
+
+        blocks = state["blocks"]
+        budget = state.get("token_budget", self.token_budget)
+        overhead = state.get("overhead_tokens", 0)
+        dashboard_tokens = int(state.get("dashboard_tokens", 0) or 0)
+
+        all_sorted = sorted(blocks.values(), key=lambda b: b.get("msg_idx", 0))
+
+        def _block_tiktoken(b: Dict) -> int:
+            if b["status"] == "compressed":
+                level = b.get("compression_level", 1)
+                summary = "" if _env_flag("SM_ARCHIVE_PLACEHOLDER_ONLY") else b.get("summary", "")
+                bid = b["id"]
+                btype = b.get("type", "")
+                if btype in ("tool_call", "assistant_message"):
+                    msg = {"role": "assistant", "content": f"[ARCHIVED:{bid} L{level}]" + (f" {summary}" if summary else "")}
+                elif btype == "checkpoint":
+                    msg = {"role": "user", "content": f"[ARCHIVED_{btype.upper()}:{bid} L{level}]" + (f" {summary}" if summary else "")}
+                else:
+                    msg = {"role": "user", "content": f"[ARCHIVED:{bid} L{level}]" + (f" {summary}" if summary else "")}
+                return count_msg_tokens([msg])
+            if b["status"] == "offloaded":
+                if b.get("offloaded_placeholder_tokens"):
+                    return b["offloaded_placeholder_tokens"]
+                summary = b.get("summary", "")
+                meta = b.get("offloaded_metadata", "")
+                meta_text = f" {meta.replace(chr(10), ' ')}" if meta else ""
+                msg = {
+                    "role": "user",
+                    "content": (
+                        f"[OFFLOADED:{b['id']}] large tool result, "
+                        f"~{b.get('tiktoken_tokens', '?')} tokens.{meta_text} {summary}"
+                    ),
+                }
+                return count_msg_tokens([msg])
+            return b.get("tiktoken_tokens") or _estimate_tokens(b.get("content", ""))
+
+        # ── Build hierarchical aggregation ───────────────────────────────────
+        # An "episode" = one root block (tool_call or assistant_message or user_message
+        # at msg_idx==0) + all its children (tool_results with parent_id == root.id).
+        # blocked/deleted blocks are tracked separately.
+        # observation messages for blocked bulk outputs are skipped from the
+        # episode display — they're implementation detail noise.
+
+        _NOTIFY_PREFIXES = (
+            "[PENDING RESULT:",
+            "[BULK OUTPUT BLOCKED:",
+            "[RESULT OMITTED:",
+            "[RESULT OUTSIDE CONTEXT:",
+            "[TOOL RESPONSE OUTSIDE CONTEXT]",
+            "[PARTIAL TOOL RESPONSE OUTSIDE CONTEXT]",
+            "[TOOL TRANSCRIPT OUTSIDE CONTEXT]",
+            "[DUPLICATE TOOL TRANSCRIPT OUTSIDE CONTEXT]",
+        )
+        _CONFIRM_PREFIXES = ("Confirmed:", "Deferred:", "Discarded:")
+
+        def _is_noise(b: Dict) -> bool:
+            """Skip internal bulk-output implementation messages."""
+            content = b.get("content", "")
+            summary = b.get("summary", "")
+            text = content or summary
+            return (
+                any(text.startswith(p) for p in _NOTIFY_PREFIXES) or
+                any(text.startswith(p) for p in _CONFIRM_PREFIXES) or
+                # notification messages have summary like "tool: Confirmed:..."
+                any(f"tool: {p}" in text for p in _CONFIRM_PREFIXES) or
+                any(f"tool: {p}" in text[:40] for p in ("'defer' → defer", "→ defer", "→ discard"))
+            )
+
+        # Separate blocks by role
+        root_blocks = []   # episode roots: initial task, tool_call, assistant_message
+        child_map: Dict[str, List] = {}   # parent_id → list of child blocks
+        blocked_blocks = []
+
+        for b in all_sorted:
+            if b["status"] in ("blocked", "pending"):
+                blocked_blocks.append(b)
+                continue
+            if b["status"] in ("discarded", "consumed", "deleted"):
+                continue  # don't show consumed/deleted implementation blocks in context section
+            if b["status"] == "deferred":
+                blocked_blocks.append(b)
+                continue
+
+            btype = b.get("type", "")
+            pid = b.get("parent_id")
+
+            if b.get("standalone_after_parent_archive"):
+                root_blocks.append(b)
+            elif btype in ("tool_call", "assistant_message", "checkpoint") or b["status"] == "pinned":
+                root_blocks.append(b)
+            elif btype == "tool_result" and pid:
+                child_map.setdefault(pid, []).append(b)
+            elif btype == "user_message" and b["status"] != "pinned":
+                # Non-initial user messages (e.g. dashboard injection placeholders): skip
+                continue
+            else:
+                root_blocks.append(b)  # fallback
+
+        # Compute total conversation tokens (all in-context blocks)
+        in_context = [b for b in all_sorted if b["status"] in ("visible", "pinned", "compressed", "offloaded")]
+        # "consumed" blocks are cleared from context (tiny [CONSUMED:BXX] placeholder, ~5 tok) — excluded here
+        conv_tokens = sum(_block_tiktoken(b) for b in in_context)
+        total_tokens = conv_tokens + overhead + dashboard_tokens
+        managed_savings = 0
+        for b in all_sorted:
+            if b.get("status") not in ("compressed", "offloaded"):
+                continue
+            original = b.get("tiktoken_tokens") or _estimate_tokens(b.get("content", ""))
+            current = _block_tiktoken(b)
+            if original > current:
+                managed_savings += original - current
+
+        pct = min(100, int(total_tokens / max(1, budget) * 100))
+        bar_width = 20
+        filled = int(pct / 100 * bar_width)
+        bar = "█" * filled + "░" * (bar_width - filled)
+
+        lines = []
+
+        # 1. Budget
+        lines.append("## Context Budget")
+        lines.append(f"[{bar}] {pct}%  (~{total_tokens:,} / {budget:,} tokens)")
+        history = list(state.get("usage_history", []))
+        if len(history) >= 2:
+            def _hist_pct(item) -> int:
+                return int(item.get("pct", 0) if isinstance(item, dict) else item)
+
+            def _hist_num(item, key):
+                if not isinstance(item, dict):
+                    return None
+                value = item.get(key)
+                return int(value) if isinstance(value, (int, float)) else None
+
+            def _fmt_delta(value: int) -> str:
+                sign = "+" if value >= 0 else "-"
+                value = abs(value)
+                if value >= 1000:
+                    return f"{sign}{value / 1000:.1f}k"
+                return f"{sign}{value}"
+
+            transitions = []
+            recent = history[-5:]
+            for prev, cur in zip(recent, recent[1:]):
+                prev_total = _hist_num(prev, "total")
+                cur_total = _hist_num(cur, "total")
+                prev_savings = _hist_num(prev, "savings")
+                cur_savings = _hist_num(cur, "savings")
+                if None in (prev_total, cur_total, prev_savings, cur_savings):
+                    transitions.append(f"  {_hist_pct(prev)}% -> {_hist_pct(cur)}%")
+                    continue
+                net = cur_total - prev_total
+                managed = cur_savings - prev_savings
+                new = net + managed
+                managed_text = f"-{managed / 1000:.1f}k" if managed >= 1000 else f"-{max(0, managed)}"
+                if managed < 0:
+                    managed_text = f"+{abs(managed) / 1000:.1f}k" if abs(managed) >= 1000 else f"+{abs(managed)}"
+                transitions.append(
+                    f"  {_hist_pct(prev)}% -> {_hist_pct(cur)}% "
+                    f"({_fmt_delta(new)}, managed {managed_text}, net {_fmt_delta(net)})"
+                )
+            lines.append("Recent usage:")
+            lines.extend(transitions)
+        if overhead > 0:
+            lines.append(f"  Fixed overhead : ~{overhead:,} tok  (tools + system)")
+            lines.append(f"  Conversation   : ~{conv_tokens:,} tok")
+            if dashboard_tokens > 0:
+                lines.append(f"  Dashboard      : ~{dashboard_tokens:,} tok")
+        lines.append("")
+
+        # 1b. Optional external work-state board ablation.
+        state_board = str(state.get("state_board", "") or "").strip()
+        if _env_flag("SM_ENABLE_STATE_BOARD") and state_board:
+            lines.append("## State Board")
+            lines.extend(state_board.splitlines())
+            lines.append("")
+
+        # 2. External payload files.
+        external_payloads = [
+            b for b in all_sorted
+            if b.get("payload_path") or b.get("public_payload_path")
+        ]
+        if external_payloads and not _env_flag("SM_DISABLE_RECOVER"):
+            total_external = sum(
+                b.get("tiktoken_tokens") or _estimate_tokens(b.get("content", ""))
+                for b in external_payloads
+            )
+            lines.append(f"External payload files: {len(external_payloads)} (~{total_external:,} source tokens)")
+            for b in sorted(
+                external_payloads,
+                key=lambda x: (x.get("tiktoken_tokens") or 0, x.get("created_at", 0)),
+                reverse=True,
+            )[:10]:
+                path = b.get("public_payload_path") or b.get("payload_path", "")
+                partial = f" [{b.get('payload_partial_info')}]" if b.get("payload_partial_info") else ""
+                lines.append(f"{b['id']} {b.get('status', '')} ~{b.get('tiktoken_tokens', '?')} tok{partial} {path} - {b.get('summary', '')}")
+            lines.append("")
+
+        def _root_total_tokens(root: Dict) -> int:
+            children = [c for c in child_map.get(root["id"], []) if not _is_noise(c)]
+            return _block_tiktoken(root) + sum(_block_tiktoken(c) for c in children)
+
+        def _kind(b: Dict) -> str:
+            if b.get("type") == "checkpoint":
+                return "checkpoint"
+            return b.get("type", "block")
+
+        def _status_label(b: Dict) -> str:
+            status = b.get("status", "")
+            if status == "compressed":
+                return f"archived L{b.get('compression_level', 1)}"
+            if status == "offloaded":
+                return "offloaded"
+            return status
+
+        def _level_label(b: Dict) -> str:
+            if b.get("status") == "compressed":
+                return f"L{int(b.get('compression_level', 1) or 1)}"
+            if b.get("status") in ("visible", "pinned"):
+                return "L0"
+            if b.get("status") == "offloaded":
+                return "L0"
+            return "-"
+
+        def _notable_children(root: Dict, children: List[Dict]) -> Tuple[List[Dict], int]:
+            visible_children = [c for c in children if c.get("status") in ("visible", "compressed", "offloaded", "blocked", "pending", "deferred")]
+            if not visible_children:
+                return [], 0
+            root_large = _root_total_tokens(root) >= 3000
+            notable = []
+            for c in visible_children:
+                tok = _block_tiktoken(c)
+                ckind = _kind(c)
+                if (
+                    tok >= 700
+                    or c.get("status") in ("blocked", "pending", "deferred")
+                    or root_large
+                    or "python" in ckind
+                    or "excel" in ckind
+                ):
+                    notable.append(c)
+            notable = sorted(notable, key=lambda c: (_block_tiktoken(c), c.get("msg_idx", 0)), reverse=True)
+            return notable[:5], max(0, len(visible_children) - len(notable[:5]))
+
+        # 6. Large visible blocks.
+        non_pinned_roots = [b for b in root_blocks if b["status"] != "pinned"]
+        large_visible_roots = [
+            b for b in non_pinned_roots
+            if b["status"] == "visible" and _root_total_tokens(b) >= 5000
+        ]
+        large_visible_children = []
+        for root in non_pinned_roots:
+            for c in child_map.get(root["id"], []):
+                if c.get("status") == "visible" and _block_tiktoken(c) >= 1000:
+                    large_visible_children.append((root, c))
+
+        if large_visible_roots or large_visible_children:
+            lines.append("## Large Visible Context")
+            lines.append(f"{'ID':<7} {'Scope':<8} {'Level':<6} {'~Tokens':<9} {'Type':<16} {'Parent'}")
+            lines.append("─" * 72)
+            for b in large_visible_roots[:8]:
+                bid = b["id"].ljust(7)
+                scope = "episode".ljust(8)
+                lvl = _level_label(b).ljust(6)
+                tok = str(_root_total_tokens(b)).ljust(9)
+                kind = _kind(b).ljust(16)
+                lines.append(f"{bid} {scope} {lvl} {tok} {kind} -")
+            for root, c in large_visible_children[:8]:
+                bid = c["id"].ljust(7)
+                scope = "block".ljust(8)
+                lvl = _level_label(c).ljust(6)
+                tok = str(_block_tiktoken(c)).ljust(9)
+                kind = _kind(c).ljust(16)
+                lines.append(f"{bid} {scope} {lvl} {tok} {kind} {root['id']}")
+            lines.append("")
+
+        # 7. Archive groups created by multi-block archive.
+        groups = state.get("archive_groups", {}) or {}
+        live_groups = []
+        for gid, group in sorted(groups.items(), key=lambda item: item[1].get("created_at", 0)):
+            ids = [
+                bid for bid in group.get("block_ids", [])
+                if blocks.get(bid, {}).get("status") == "compressed"
+                and blocks.get(bid, {}).get("archive_group_id") == gid
+            ]
+            if ids:
+                live_groups.append((gid, group, ids))
+        if live_groups:
+            lines.append("## Archived Groups")
+            lines.append(f"{'ID':<5} {'Level':<8} {'Blocks':<14} {'~Tokens'}")
+            lines.append("─" * 72)
+            for gid, group, ids in live_groups[-8:]:
+                in_level = group.get("input_level")
+                out_level = group.get("output_level")
+                if in_level is None or out_level is None:
+                    sample = blocks.get(ids[0], {})
+                    out_level = int(sample.get("compression_level", 1) or 1)
+                    in_level = max(0, out_level - 1)
+                level_label = f"L{in_level}→L{out_level}"
+                block_label = f"{len(ids)} blocks"
+                tok = sum(_block_tiktoken(blocks[bid]) for bid in ids if bid in blocks)
+                lines.append(f"{gid:<5} {level_label:<8} {block_label:<14} {tok}")
+            lines.append("")
+
+        # 8. Recent block map.
+        if non_pinned_roots:
+            lines.append("## Recent Blocks")
+            lines.append(f"{'ID':<7} {'Status':<13} {'~Tokens':<9} {'Type':<16} {'Children'}")
+            lines.append("─" * 72)
+            for root in non_pinned_roots[-12:]:
+                rid = root["id"]
+
+                # Aggregate tokens: root + all non-noise children
+                children = [c for c in child_map.get(rid, []) if not _is_noise(c)]
+                total_block_tok = _root_total_tokens(root)
+
+                # Status label
+                bid = rid.ljust(7)
+                status = root["status"]
+                if status == "compressed":
+                    status_str = _status_label(root).ljust(13)
+                else:
+                    n_results = len(children)
+                    status_str = (f"visible +{n_results}r" if n_results else "visible").ljust(13)
+
+                tok_str = str(total_block_tok).ljust(9)
+                label = _kind(root).ljust(16)
+                lines.append(f"{bid} {status_str} {tok_str} {label} {len(children)}")
+            lines.append("")
+        else:
+            lines.append("## Recent Blocks")
+            lines.append("  (only the initial task message)")
+            lines.append("")
+
+        rendered = "\n".join(lines)
+        if return_metrics:
+            return rendered, {
+                "pct": pct,
+                "total_tokens": total_tokens,
+                "managed_savings": managed_savings,
+            }
+        return rendered
+
+    def _render_better_dashboard(self, state: Dict, return_metrics: bool = False):
+        """Render the better-dashboard ablation view.
+
+        This branch is intentionally factual and complete for in-context blocks:
+        budget plus one ledger table with ID, approximate tokens, age, type,
+        compression level, and status. It avoids top-k large/recent sections,
+        payload path ledgers, summaries, and action preferences.
+        """
+        blocks = state["blocks"]
+        budget = state.get("token_budget", self.token_budget)
+        overhead = state.get("overhead_tokens", 0)
+        dashboard_tokens = int(state.get("dashboard_tokens", 0) or 0)
+        all_sorted = sorted(blocks.values(), key=lambda b: b.get("msg_idx", 0))
+
+        def _block_tiktoken(b: Dict) -> int:
+            if b["status"] == "compressed":
+                level = b.get("compression_level", 1)
+                summary = "" if _env_flag("SM_ARCHIVE_PLACEHOLDER_ONLY") else b.get("summary", "")
+                bid = b["id"]
+                btype = b.get("type", "")
+                if btype in ("tool_call", "assistant_message"):
+                    msg = {"role": "assistant", "content": f"[ARCHIVED:{bid} L{level}]" + (f" {summary}" if summary else "")}
+                elif btype == "checkpoint":
+                    msg = {"role": "user", "content": f"[ARCHIVED_{btype.upper()}:{bid} L{level}]" + (f" {summary}" if summary else "")}
+                else:
+                    msg = {"role": "user", "content": f"[ARCHIVED:{bid} L{level}]" + (f" {summary}" if summary else "")}
+                return count_msg_tokens([msg])
+            if b["status"] == "offloaded":
+                if b.get("offloaded_placeholder_tokens"):
+                    return b["offloaded_placeholder_tokens"]
+                summary = b.get("summary", "")
+                meta = b.get("offloaded_metadata", "")
+                meta_text = f" {meta.replace(chr(10), ' ')}" if meta else ""
+                msg = {
+                    "role": "user",
+                    "content": (
+                        f"[OFFLOADED:{b['id']}] large tool result, "
+                        f"~{b.get('tiktoken_tokens', '?')} tokens.{meta_text} {summary}"
+                    ),
+                }
+                return count_msg_tokens([msg])
+            return b.get("tiktoken_tokens") or _estimate_tokens(b.get("content", ""))
+
+        _NOTIFY_PREFIXES = (
+            "[PENDING RESULT:",
+            "[BULK OUTPUT BLOCKED:",
+            "[RESULT OMITTED:",
+            "[RESULT OUTSIDE CONTEXT:",
+            "[TOOL RESPONSE OUTSIDE CONTEXT]",
+            "[PARTIAL TOOL RESPONSE OUTSIDE CONTEXT]",
+            "[TOOL TRANSCRIPT OUTSIDE CONTEXT]",
+            "[DUPLICATE TOOL TRANSCRIPT OUTSIDE CONTEXT]",
+        )
+        _CONFIRM_PREFIXES = ("Confirmed:", "Deferred:", "Discarded:")
+
+        def _is_noise(b: Dict) -> bool:
+            content = b.get("content", "")
+            summary = b.get("summary", "")
+            text = content or summary
+            return (
+                any(text.startswith(p) for p in _NOTIFY_PREFIXES) or
+                any(text.startswith(p) for p in _CONFIRM_PREFIXES) or
+                any(f"tool: {p}" in text for p in _CONFIRM_PREFIXES) or
+                any(f"tool: {p}" in text[:40] for p in ("'defer' → defer", "→ defer", "→ discard"))
+            )
+
+        root_blocks = []
+        root_order: Dict[str, int] = {}
+        for b in all_sorted:
+            if b.get("status") in ("discarded", "consumed", "deleted", "blocked", "pending", "deferred"):
+                continue
+            if _is_noise(b):
+                continue
+            btype = b.get("type", "")
+            if b.get("standalone_after_parent_archive"):
+                root_blocks.append(b)
+            elif btype in ("tool_call", "assistant_message", "checkpoint") or b.get("status") == "pinned":
+                root_blocks.append(b)
+            elif btype == "user_message" and b.get("status") != "pinned":
+                continue
+            elif not b.get("parent_id"):
+                root_blocks.append(b)
+        for pos, root in enumerate(root_blocks):
+            root_order[root["id"]] = pos
+        max_root_ord = max(root_order.values(), default=0)
+
+        def _age_label(b: Dict) -> str:
+            root_id = b.get("parent_id") or b.get("id")
+            pos = root_order.get(root_id)
+            if pos is None:
+                return "-"
+            return f"{max_root_ord - pos}r"
+
+        def _kind(b: Dict) -> str:
+            if b.get("type") == "checkpoint":
+                return "checkpoint"
+            return b.get("type", "block")
+
+        def _level_label(b: Dict) -> str:
+            if b.get("status") == "compressed":
+                return f"L{int(b.get('compression_level', 1) or 1)}"
+            if b.get("status") in ("visible", "pinned", "offloaded"):
+                return "L0"
+            return "-"
+
+        def _status_label(b: Dict) -> str:
+            status = b.get("status", "")
+            if status == "compressed":
+                return "archived"
+            if status == "offloaded":
+                return "offloaded_placeholder"
+            return status
+
+        active_blocks = [
+            b for b in all_sorted
+            if b.get("status") in ("visible", "pinned", "compressed", "offloaded", "blocked", "pending", "deferred")
+            and not _is_noise(b)
+        ]
+        in_context = [
+            b for b in active_blocks
+            if b.get("status") in ("visible", "pinned", "compressed", "offloaded")
+        ]
+        conv_tokens = sum(_block_tiktoken(b) for b in in_context)
+        total_tokens = conv_tokens + overhead + dashboard_tokens
+        managed_savings = 0
+        for b in all_sorted:
+            if b.get("status") not in ("compressed", "offloaded"):
+                continue
+            original = b.get("tiktoken_tokens") or _estimate_tokens(b.get("content", ""))
+            current = _block_tiktoken(b)
+            if original > current:
+                managed_savings += original - current
+
+        pct = min(100, int(total_tokens / max(1, budget) * 100))
+        bar_width = 20
+        filled = int(pct / 100 * bar_width)
+        bar = "█" * filled + "░" * (bar_width - filled)
+
+        lines = []
+        state_board = str(state.get("state_board", "") or "").strip()
+        if _env_flag("SM_ENABLE_STATE_BOARD") and state_board:
+            lines.append("## State Board")
+            lines.extend(state_board.splitlines())
+            lines.append("")
+
+        lines.append("## Context Budget")
+        lines.append(f"[{bar}] {pct}%  (~{total_tokens:,} / {budget:,} tokens)")
+        if overhead > 0:
+            lines.append(f"  Fixed overhead : ~{overhead:,} tok  (tools + system)")
+            lines.append(f"  Conversation   : ~{conv_tokens:,} tok")
+            if dashboard_tokens > 0:
+                lines.append(f"  Dashboard      : ~{dashboard_tokens:,} tok")
+        lines.append("")
+
+        lines.append("## Context Blocks")
+        lines.append("Age is root-turn distance; 0r is newest.")
+        # In compact mode the archived blocks are not re-listed here: each one
+        # already appears in the message stream as an inline [ARCHIVED:Bx Ln]
+        # marker (id/type/size/summary), so a per-row table would just duplicate
+        # it. We detail only the live blocks and fold archived into one summary
+        # line (count + tokens + id span + how to recover).
+        _compact = _env_flag("SM_COMPACT_ARCHIVE")
+        detail_blocks = active_blocks
+        archived_blocks = []
+        if _compact:
+            detail_blocks = [b for b in active_blocks if b.get("status") != "compressed"]
+            archived_blocks = [b for b in active_blocks if b.get("status") == "compressed"]
+        rows = []
+        for b in detail_blocks:
+            tok = _block_tiktoken(b)
+            rows.append({
+                "id": b["id"],
+                "tok": tok,
+                "age": _age_label(b),
+                "type": _kind(b),
+                "level": _level_label(b),
+                "status": _status_label(b),
+                "parent": b.get("parent_id") or "-",
+            })
+        if rows:
+            lines.append(f"{'ID':<7} {'~Tok':>7} {'Age':>5} {'Type':<18} {'Level':<6} {'Parent':<7} {'Status'}")
+            lines.append("─" * 86)
+            for row in rows:
+                lines.append(
+                    f"{row['id']:<7} {row['tok']:>7} {row['age']:>5} "
+                    f"{row['type']:<18} {row['level']:<6} {row['parent']:<7} {row['status']}"
+                )
+            lines.append("")
+        elif not archived_blocks:
+            lines.append("  (no visible context blocks)")
+            lines.append("")
+        if archived_blocks:
+            a_tok = sum(_block_tiktoken(b) for b in archived_blocks)
+            a_ids = [b["id"] for b in archived_blocks]
+            lines.append(
+                f"archived (compressed): {len(archived_blocks)} blocks, ~{a_tok:,} tok, "
+                f"ids {a_ids[0]}..{a_ids[-1]} — each appears inline as an [ARCHIVED:Bx Ln] "
+                f"marker (in temporal order); recover by id."
+            )
+            lines.append("")
+
+        rendered = "\n".join(lines)
+        if return_metrics:
+            return rendered, {
+                "pct": pct,
+                "total_tokens": total_tokens,
+                "managed_savings": managed_savings,
+            }
+        return rendered
+
+    def get_state(self) -> Dict:
+        return self._load()

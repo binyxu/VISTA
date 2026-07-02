@@ -1,0 +1,243 @@
+{
+  "configurations": [
+    {
+      "name": "CanvasArrangeExamS2LEnv",
+      "env_class": "gem.envs.canvas_arrange_exam_s2l.canvas_arrange_exam_s2l.CanvasArrangeExamS2LEnv",
+      "env_params": {
+        "seed": 42,
+        "num_courses": 75,
+        "canvas_exam_rate": 0.8,
+        "email_exam_rate": 0.2
+      },
+      "mcp_servers": {
+        "canvas": {
+          "enabled": true,
+          "type": "canvas",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/canvas",
+            "login_id": "rkelly27@mcp.com",
+            "password": "student_password_123"
+          }
+        },
+        "email": {
+          "enabled": true,
+          "type": "email",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/emails",
+            "email": "rkelly27@mcp.com",
+            "password": "ronald_81q2O"
+          }
+        },
+        "excel": {
+          "enabled": true,
+          "type": "excel",
+          "params": {
+            "excel_files_path": "{agent_workspace}"
+          }
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "enabled": true,
+          "type": "claim_done",
+          "params": {}
+        },
+        "memory": {
+          "enabled": true,
+          "type": "memory",
+          "params": {
+            "memory_file_path": "{agent_workspace}/memory/memory.json"
+          }
+        }
+      }
+    },
+    {
+      "name": "CanvasListTestS2LEnv",
+      "env_class": "gem.envs.canvas_list_test_s2l.canvas_list_test_s2l.CanvasListTestS2LEnv",
+      "env_params": {
+        "seed": 42,
+        "num_courses": 70,
+        "submission_prob": 0.3,
+        "exemption_prob": 0.1,
+        "exemption_meet_prob": 0.5
+      },
+      "mcp_servers": {
+        "canvas": {
+          "enabled": true,
+          "type": "canvas",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/canvas",
+            "login_id": "ryan.brown93@mcp.com",
+            "password": "BryapivvLK7C"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "enabled": true,
+          "type": "claim_done",
+          "params": {}
+        },
+        "memory": {
+          "enabled": true,
+          "type": "memory",
+          "params": {
+            "memory_file_path": "{agent_workspace}/memory/memory.json"
+          }
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        }
+      }
+    },
+    {
+      "name": "CourseAssistantS2LEnv",
+      "env_class": "gem.envs.course_assistant_s2l.course_assistant_s2l.CourseAssistantS2LEnv",
+      "env_params": {
+        "num_students": 350,
+        "dropout_rate": 0.2,
+        "submission_rate": 0.7,
+        "seed": 42
+      },
+      "mcp_servers": {
+        "excel": {
+          "enabled": true,
+          "type": "excel",
+          "params": {
+            "excel_files_path": "{agent_workspace}"
+          }
+        },
+        "email": {
+          "enabled": true,
+          "type": "email",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/emails"
+          }
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        },
+        "terminal": {
+          "enabled": true,
+          "type": "terminal",
+          "params": {
+            "agent_workspace": "{agent_workspace}"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "enabled": true,
+          "type": "claim_done",
+          "params": {}
+        }
+      }
+    },
+    {
+      "env_class": "gem.envs.ab_testing_s2l.ab_testing_s2l.ABTestingS2LEnv",
+      "env_params": {
+        "num_scenarios": 2000,
+        "num_days": 365,
+        "seed": 42
+      },
+      "mcp_servers": {
+        "google_cloud": {
+          "type": "google_cloud",
+          "enabled": true,
+          "params": {
+            "data_dir": "{task_workspace}/local_db/google_cloud"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "type": "claim_done",
+          "enabled": true,
+          "params": {}
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        }
+      },
+      "name": "ABTestingS2LEnv"
+    },
+    {
+      "env_class": "gem.envs.academic_warning_s2l.academic_warning_s2l.AcademicWarningS2LEnv",
+      "env_params": {
+        "num_students": 360,
+        "num_exams": 12,
+        "difficulty": "medium",
+        "seed": 42,
+        "verbose": false
+      },
+      "mcp_servers": {
+        "google_cloud": {
+          "type": "google_cloud",
+          "enabled": true,
+          "params": {
+            "data_dir": "{task_workspace}/local_db/google_cloud"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "type": "claim_done",
+          "enabled": true,
+          "params": {}
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        }
+      },
+      "name": "AcademicWarningS2LEnv"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "method_name": "react_baseline",
+  "description": "SWE-Bench direct React-style baseline without self-managed context dashboard.",
+  "strict_long_context": false,
+  "better_dashboard": false,
+  "max_context_size": 128000,
+  "reserve_output_tokens": 4096,
+  "dashboard": {
+    "enabled": false,
+    "include_budget": false,
+    "include_deferred_blocks": false,
+    "max_block_preview_chars": 0
+  },
+  "generation": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_output_tokens": 4096
+  }
+}

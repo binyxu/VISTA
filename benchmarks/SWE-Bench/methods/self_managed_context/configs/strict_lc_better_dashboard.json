@@ -1,0 +1,19 @@
+{
+  "method_name": "self_managed_strict_lc_better_dashboard",
+  "description": "SWE-Bench inference method adapted from LOCAbench strict_lc_better_dashboard.",
+  "strict_long_context": true,
+  "better_dashboard": true,
+  "max_context_size": 128000,
+  "reserve_output_tokens": 4096,
+  "dashboard": {
+    "enabled": true,
+    "include_budget": true,
+    "include_deferred_blocks": true,
+    "max_block_preview_chars": 280
+  },
+  "generation": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_output_tokens": 4096
+  }
+}

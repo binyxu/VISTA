@@ -1,0 +1,124 @@
+{
+  "configurations": [
+    {
+      "env_class": "gem.envs.apply_phd_email_s2l.apply_phd_email_s2l.ApplyPhDEmailS2LEnv",
+      "env_params": {
+        "num_professors": 360,
+        "structure": "standard",
+        "receiver_idx": 0,
+        "seed": 42,
+        "num_positive": 32,
+        "positive_weight": 1.0,
+        "research_assistant_weight": 1.0,
+        "no_spots_weight": 1.0,
+        "no_response_weight": 0.001,
+        "assign_different_structures": true,
+        "verbose": false
+      },
+      "mcp_servers": {
+        "filesystem": {
+          "type": "filesystem",
+          "enabled": true,
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        },
+        "memory": {
+          "type": "memory",
+          "enabled": true,
+          "params": {
+            "memory_file_path": "{task_workspace}/memory_data/memory.json"
+          }
+        },
+        "email": {
+          "type": "email",
+          "enabled": true,
+          "params": {
+            "data_dir": "{task_workspace}/local_db/emails",
+            "email": "maryc@mcp.com",
+            "password": "castillo$m888"
+          }
+        },
+        "terminal": {
+          "type": "terminal",
+          "enabled": true,
+          "params": {
+            "allowed_dir": "{agent_workspace}",
+            "allowed_flags": "all",
+            "max_command_length": "2048",
+            "command_timeout": "60",
+            "allow_shell_operators": "true"
+          }
+        },
+        "pdf_tools": {
+          "type": "pdf_tools",
+          "enabled": true,
+          "params": {
+            "workspace_path": "{agent_workspace}",
+            "tempfile_dir": "{task_workspace}/.pdf_tools_tempfiles"
+          }
+        },
+        "claim_done": {
+          "type": "claim_done",
+          "enabled": true,
+          "params": {}
+        }
+      },
+      "name": "ApplyPhDEmailS2LEnv"
+    },
+    {
+      "name": "WoocommerceStockAlertS2LEnv",
+      "env_class": "gem.envs.woocommerce_stock_alert_s2l.woocommerce_stock_alert_s2l.WoocommerceStockAlertS2LEnv",
+      "env_params": {
+        "num_low_stock": 144,
+        "num_normal_stock": 400,
+        "seed": 42,
+        "verbose": false
+      },
+      "mcp_servers": {
+        "woocommerce": {
+          "enabled": true,
+          "type": "woocommerce",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/woocommerce"
+          }
+        },
+        "google_sheet": {
+          "enabled": true,
+          "type": "google_sheet",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/google_sheets"
+          }
+        },
+        "email": {
+          "enabled": true,
+          "type": "email",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/emails",
+            "email": "admin@woocommerce.local",
+            "password": "admin123"
+          }
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "enabled": true,
+          "type": "claim_done",
+          "params": {}
+        }
+      }
+    }
+  ]
+}

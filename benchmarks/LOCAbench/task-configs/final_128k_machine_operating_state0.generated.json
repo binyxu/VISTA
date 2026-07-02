@@ -1,0 +1,52 @@
+{
+  "configurations": [
+    {
+      "env_class": "gem.envs.machine_operating_s2l.machine_operating_s2l.MachineOperatingS2LEnv",
+      "env_params": {
+        "hours": 80,
+        "interval_minutes": 5,
+        "anomaly_rate": 0.15,
+        "difficulty": "easy",
+        "total_machines": 25,
+        "total_sensors": "10",
+        "seed": 42
+      },
+      "mcp_servers": {
+        "google_cloud": {
+          "type": "google_cloud",
+          "enabled": true,
+          "params": {
+            "data_dir": "{task_workspace}/local_db/google_cloud"
+          }
+        },
+        "excel": {
+          "enabled": true,
+          "type": "excel",
+          "params": {
+            "excel_files_path": "{agent_workspace}"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "type": "claim_done",
+          "enabled": true,
+          "params": {}
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        }
+      },
+      "name": "MachineOperatingS2LEnv"
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "configurations": [
+    {
+      "name": "FilterLowSellingProductsS2LEnv",
+      "env_class": "gem.envs.filter_low_selling_products_s2l.filter_low_selling_products_s2l.FilterLowSellingProductsS2LEnv",
+      "env_params": {
+        "num_low_selling": 160,
+        "num_normal_selling": 320,
+        "num_subscribers": 120,
+        "seed": 42,
+        "verbose": false
+      },
+      "mcp_servers": {
+        "woocommerce": {
+          "enabled": true,
+          "type": "woocommerce",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/woocommerce"
+          }
+        },
+        "email": {
+          "enabled": true,
+          "type": "email",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/emails",
+            "email": "admin@woocommerce.local",
+            "password": "admin123"
+          }
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "enabled": true,
+          "type": "claim_done",
+          "params": {}
+        }
+      }
+    },
+    {
+      "name": "FilterLowSellingProductsS2LEnv",
+      "env_class": "gem.envs.filter_low_selling_products_s2l.filter_low_selling_products_s2l.FilterLowSellingProductsS2LEnv",
+      "env_params": {
+        "num_low_selling": 160,
+        "num_normal_selling": 320,
+        "num_subscribers": 120,
+        "seed": 123,
+        "verbose": false
+      },
+      "mcp_servers": {
+        "woocommerce": {
+          "enabled": true,
+          "type": "woocommerce",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/woocommerce"
+          }
+        },
+        "email": {
+          "enabled": true,
+          "type": "email",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/emails",
+            "email": "admin@woocommerce.local",
+            "password": "admin123"
+          }
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "enabled": true,
+          "type": "claim_done",
+          "params": {}
+        }
+      }
+    },
+    {
+      "name": "FilterLowSellingProductsS2LEnv",
+      "env_class": "gem.envs.filter_low_selling_products_s2l.filter_low_selling_products_s2l.FilterLowSellingProductsS2LEnv",
+      "env_params": {
+        "num_low_selling": 160,
+        "num_normal_selling": 320,
+        "num_subscribers": 120,
+        "seed": 456,
+        "verbose": false
+      },
+      "mcp_servers": {
+        "woocommerce": {
+          "enabled": true,
+          "type": "woocommerce",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/woocommerce"
+          }
+        },
+        "email": {
+          "enabled": true,
+          "type": "email",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/emails",
+            "email": "admin@woocommerce.local",
+            "password": "admin123"
+          }
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "enabled": true,
+          "type": "claim_done",
+          "params": {}
+        }
+      }
+    },
+    {
+      "name": "FilterLowSellingProductsS2LEnv",
+      "env_class": "gem.envs.filter_low_selling_products_s2l.filter_low_selling_products_s2l.FilterLowSellingProductsS2LEnv",
+      "env_params": {
+        "num_low_selling": 160,
+        "num_normal_selling": 320,
+        "num_subscribers": 120,
+        "seed": 789,
+        "verbose": false
+      },
+      "mcp_servers": {
+        "woocommerce": {
+          "enabled": true,
+          "type": "woocommerce",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/woocommerce"
+          }
+        },
+        "email": {
+          "enabled": true,
+          "type": "email",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/emails",
+            "email": "admin@woocommerce.local",
+            "password": "admin123"
+          }
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "enabled": true,
+          "type": "claim_done",
+          "params": {}
+        }
+      }
+    },
+    {
+      "name": "FilterLowSellingProductsS2LEnv",
+      "env_class": "gem.envs.filter_low_selling_products_s2l.filter_low_selling_products_s2l.FilterLowSellingProductsS2LEnv",
+      "env_params": {
+        "num_low_selling": 160,
+        "num_normal_selling": 320,
+        "num_subscribers": 120,
+        "seed": 2024,
+        "verbose": false
+      },
+      "mcp_servers": {
+        "woocommerce": {
+          "enabled": true,
+          "type": "woocommerce",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/woocommerce"
+          }
+        },
+        "email": {
+          "enabled": true,
+          "type": "email",
+          "params": {
+            "data_dir": "{task_workspace}/local_db/emails",
+            "email": "admin@woocommerce.local",
+            "password": "admin123"
+          }
+        },
+        "filesystem": {
+          "enabled": true,
+          "type": "filesystem",
+          "params": {
+            "workspace_path": "{agent_workspace}"
+          }
+        },
+        "python_execute": {
+          "enabled": true,
+          "type": "python_execute",
+          "params": {
+            "workspace_dir": "{agent_workspace}"
+          }
+        },
+        "claim_done": {
+          "enabled": true,
+          "type": "claim_done",
+          "params": {}
+        }
+      }
+    }
+  ]
+}

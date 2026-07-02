@@ -1,0 +1,184 @@
+{
+  "server_config": {
+    "smtp_server": "localhost",
+    "smtp_port": 2525,
+    "imap_server": "localhost",
+    "imap_port": 1143,
+    "use_ssl": false,
+    "use_starttls": false,
+    "timeout": 30
+  },
+  "sender_account": {
+    "email": "steven.hernandez@mcp.com",
+    "password": "SH0913#6pK4u",
+    "name": "Steven Hernandez"
+  },
+  "recipient": {
+    "email": "rkelly27@mcp.com",
+    "name": "Ronald Kelly",
+    "password": "ronald_81q2O"
+  },
+  "exam_notifications": [
+    {
+      "subject": "Final Exam - Speech Recognition",
+      "course_name": "Speech Recognition",
+      "course_code": "AI205",
+      "exam_date": "2025-02-14",
+      "exam_time": "16:00",
+      "exam_location": "Engineering Hall, Room 133",
+      "exam_type": "Closed-book",
+      "duration": "180 minutes",
+      "teacher": "Steven Hernandez",
+      "teacher_email": "steven.hernandez@mcp.com",
+      "is_tbd": false
+    },
+    {
+      "subject": "Final Exam - Microservices Architecture",
+      "course_name": "Microservices Architecture",
+      "course_code": "CLOUD302",
+      "exam_date": "2025-03-16",
+      "exam_time": "11:00",
+      "exam_location": "Computer Science Building, Room 116",
+      "exam_type": "Closed-book",
+      "duration": "180 minutes",
+      "teacher": "Smith Johnson",
+      "teacher_email": "smith.johnson@mcp.com",
+      "is_tbd": false
+    },
+    {
+      "subject": "Final Exam - Ethical AI",
+      "course_name": "Ethical AI",
+      "course_code": "AI204",
+      "exam_date": "2025-02-21",
+      "exam_time": "08:00",
+      "exam_location": "Science Center, Room 133",
+      "exam_type": "Closed-book",
+      "duration": "90 minutes",
+      "teacher": "Emily Davis",
+      "teacher_email": "emily.davis@mcp.com",
+      "is_tbd": false
+    },
+    {
+      "subject": "Final Exam - Corporate Finance",
+      "course_name": "Corporate Finance",
+      "course_code": "BUS403",
+      "exam_date": "2025-03-14",
+      "exam_time": "13:00",
+      "exam_location": "Main Building, Room 114",
+      "exam_type": "Closed-book",
+      "duration": "120 minutes",
+      "teacher": "Smith Johnson",
+      "teacher_email": "smith.johnson@mcp.com",
+      "is_tbd": false
+    },
+    {
+      "subject": "Final Exam - Algebraic Geometry",
+      "course_name": "Algebraic Geometry",
+      "course_code": "MATH504",
+      "exam_date": "2025-03-06",
+      "exam_time": "15:00",
+      "exam_location": "Main Building, Room 123",
+      "exam_type": "Closed-book",
+      "duration": "90 minutes",
+      "teacher": "Emily Davis",
+      "teacher_email": "emily.davis@mcp.com",
+      "is_tbd": false
+    },
+    {
+      "subject": "Final Exam - Information Visualization",
+      "course_name": "Information Visualization",
+      "course_code": "HCI501",
+      "exam_date": "2025-02-17",
+      "exam_time": "07:00",
+      "exam_location": "Academic Building B, Room 104",
+      "exam_type": "Open-book",
+      "duration": "180 minutes",
+      "teacher": "Christopher Miller",
+      "teacher_email": "christopher.miller@mcp.com",
+      "is_tbd": false
+    },
+    {
+      "subject": "Final Exam - Photovoltaics",
+      "course_name": "Photovoltaics",
+      "course_code": "EE307",
+      "exam_date": "2025-03-24",
+      "exam_time": "13:00",
+      "exam_location": "Mathematics Building, Room 104",
+      "exam_type": "Closed-book",
+      "duration": "120 minutes",
+      "teacher": "Smith Johnson",
+      "teacher_email": "smith.johnson@mcp.com",
+      "is_tbd": false
+    },
+    {
+      "subject": "Final Exam - Network Troubleshooting",
+      "course_name": "Network Troubleshooting",
+      "course_code": "NET203",
+      "exam_date": "2025-03-20",
+      "exam_time": "16:00",
+      "exam_location": "Chemistry Building, Room 110",
+      "exam_type": "Closed-book",
+      "duration": "150 minutes",
+      "teacher": "Steven Hernandez",
+      "teacher_email": "steven.hernandez@mcp.com",
+      "is_tbd": false
+    },
+    {
+      "subject": "Final Exam - Independent Study in Simulation",
+      "course_name": "Independent Study in Simulation",
+      "course_code": "GRD140",
+      "exam_date": "2025-04-02",
+      "exam_time": "15:00",
+      "exam_location": "Business School, Room 111",
+      "exam_type": "Open-book",
+      "duration": "90 minutes",
+      "teacher": "Debra Flores",
+      "teacher_email": "debra_flores76@mcp.com",
+      "is_tbd": false
+    },
+    {
+      "subject": "Final Exam - Seminar in Systems",
+      "course_name": "Seminar in Systems",
+      "course_code": "ADV143",
+      "exam_date": "2025-03-10",
+      "exam_time": "09:00",
+      "exam_location": "Mathematics Building, Room 112",
+      "exam_type": "Open-book",
+      "duration": "150 minutes",
+      "teacher": "Emily Davis",
+      "teacher_email": "emily.davis@mcp.com",
+      "is_tbd": false
+    }
+  ],
+  "distraction_emails": [
+    {
+      "subject": "Campus Library Hours Update",
+      "content": "Dear Students,\n\nPlease note that the campus library will have extended hours during finals week:\n\nMonday-Friday: 7:00 AM - 11:00 PM\nSaturday-Sunday: 9:00 AM - 9:00 PM\n\nGood luck with your studies!\n\nCampus Services"
+    },
+    {
+      "subject": "Student Activity: Winter Social Event",
+      "content": "Hi everyone,\n\nJoin us for the Winter Social Event on January 20th at 6:00 PM in the Student Center!\n\nFood, games, and prizes!\n\nStudent Council"
+    },
+    {
+      "subject": "IT Services: System Maintenance Notice",
+      "content": "Dear Users,\n\nThe university IT system will undergo maintenance on January 16th from 2:00 AM to 4:00 AM.\n\nSome services may be temporarily unavailable.\n\nIT Department"
+    }
+  ],
+  "logging": {
+    "log_file": "email_send.log",
+    "log_level": "INFO",
+    "console_output": true
+  },
+  "email_content": {
+    "subject": "Exam Notification - Important Reminders",
+    "template_file": "exam_notification_template.txt",
+    "exam_info": {
+      "course_name": "Speech Recognition",
+      "exam_date": "2025-02-14",
+      "exam_time": "16:00",
+      "exam_location": "Engineering Hall, Room 133",
+      "exam_type": "Closed-book",
+      "duration": "180 minutes"
+    }
+  }
+}
