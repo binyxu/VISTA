@@ -355,7 +355,7 @@ h3 {
 }
 
 .results-figures {
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.55fr);
   align-items: stretch;
 }
 
