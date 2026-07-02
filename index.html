@@ -26,6 +26,7 @@
         <a href="#abstract">Abstract</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
+        <a href="#tables">Tables</a>
         <a href="#code">Code</a>
       </nav>
     </header>
@@ -98,8 +99,8 @@
         <img class="figure-image large" src="./assets/system_overview.png" alt="VISTA methodology overview" />
       </section>
 
-      <section class="content-section split-section">
-        <div>
+      <section class="content-section case-study-section">
+        <div class="case-study-copy">
           <div class="section-kicker">Case Study Trace</div>
           <h2>VISTA archives large evidence and recovers payloads when needed.</h2>
           <p>
@@ -108,7 +109,7 @@
             agent needs them.
           </p>
         </div>
-        <img class="figure-image medium" src="./assets/case_study_curve.png" alt="Case study curve showing VISTA context management over time" />
+        <img class="figure-image case-study-image" src="./assets/case_study_curve.png" alt="Case study curve showing VISTA context management over time" />
       </section>
 
       <section id="results" class="content-section results-section">
@@ -128,11 +129,85 @@
             <span class="metric-label">Training examples or learned compression policy</span>
           </div>
         </div>
-        <div class="figure-grid">
+        <div class="figure-grid results-figures">
           <img class="figure-image small" src="./assets/main_results.png" alt="Main benchmark results" />
           <img class="figure-image small" src="./assets/ablation.png" alt="Ablation results showing dashboard contribution" />
           <img class="figure-image small" src="./assets/pressure_curve.png" alt="Context pressure curve" />
-          <img class="figure-image small" src="./assets/system_overview.png" alt="Methodology overview" />
+        </div>
+
+        <div id="tables" class="table-section">
+          <div class="table-heading">
+            <div>
+              <div class="section-kicker">Main Results</div>
+              <h3>Accuracy and trajectory cost across long-horizon agent benchmarks.</h3>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="result-table">
+              <thead>
+                <tr>
+                  <th scope="col">Method</th>
+                  <th scope="col">State</th>
+                  <th scope="col">Control</th>
+                  <th scope="col">Recover</th>
+                  <th scope="col">LOCA Acc.</th>
+                  <th scope="col">LOCA Traj.</th>
+                  <th scope="col">BrowseComp Acc.</th>
+                  <th scope="col">BrowseComp Traj.</th>
+                  <th scope="col">GAIA Acc.</th>
+                  <th scope="col">GAIA Traj.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="group-row"><th colspan="10" scope="rowgroup">Fixed external policy</th></tr>
+                <tr><th scope="row">ReAct</th><td>-</td><td>-</td><td>-</td><td>22.7</td><td>3.51M</td><td>39.3</td><td>163K</td><td>61.2</td><td>23K</td></tr>
+                <tr><th scope="row">Tool-result Clearing</th><td>-</td><td>-</td><td>-</td><td>26.7</td><td>2.60M</td><td>42.7</td><td>161K</td><td>65.5</td><td>24K</td></tr>
+                <tr><th scope="row">Stale-obs. Masking</th><td>-</td><td>-</td><td>-</td><td>28.0</td><td>3.32M</td><td>38.0</td><td>112K</td><td>61.8</td><td>24K</td></tr>
+                <tr><th scope="row">Skeleton Compression</th><td>-</td><td>-</td><td>-</td><td>33.3</td><td>2.84M</td><td>40.0</td><td>139K</td><td>70.3</td><td>28K</td></tr>
+                <tr class="group-row"><th colspan="10" scope="rowgroup">Agent-mediated / lossy</th></tr>
+                <tr><th scope="row">SLIM (summary)</th><td>-</td><td>partial</td><td>-</td><td>29.3</td><td>3.76M</td><td>49.3</td><td>162K</td><td>67.9</td><td>30K</td></tr>
+                <tr><th scope="row">Active Context Compression</th><td>-</td><td>yes</td><td>-</td><td>36.0</td><td>3.20M</td><td>42.7</td><td>162K</td><td>71.5</td><td>39K</td></tr>
+                <tr><th scope="row">Context-Folding</th><td>-</td><td>yes</td><td>-</td><td>34.7</td><td>3.41M</td><td>43.3</td><td>166K</td><td>64.8</td><td>39K</td></tr>
+                <tr class="group-row"><th colspan="10" scope="rowgroup">Lossless external store</th></tr>
+                <tr><th scope="row">Auto-Archive + Recover</th><td>-</td><td>-</td><td>yes</td><td>44.0</td><td>2.73M</td><td>45.3</td><td>133K</td><td>63.6</td><td>20K</td></tr>
+                <tr><th scope="row">Claude Code</th><td>-</td><td>yes</td><td>partial</td><td>42.7</td><td>6.72M</td><td>52.0</td><td>247K</td><td>73.9</td><td>44K</td></tr>
+                <tr class="group-row"><th colspan="10" scope="rowgroup">VISTA and ablations</th></tr>
+                <tr><th scope="row">VISTA w/o dashboard</th><td>-</td><td>yes</td><td>yes</td><td>37.3</td><td>5.25M</td><td>50.0</td><td>423K</td><td>68.5</td><td>24K</td></tr>
+                <tr><th scope="row">VISTA w/o recovery</th><td>yes</td><td>yes</td><td>-</td><td>45.3</td><td>2.99M</td><td>43.3</td><td>161K</td><td>72.1</td><td>28K</td></tr>
+                <tr class="ours"><th scope="row">VISTA (full)</th><td>yes</td><td>yes</td><td>yes</td><td class="best">50.7</td><td>2.86M</td><td class="best">58.0</td><td>135K</td><td>73.3</td><td>33K</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-heading second-table">
+            <div>
+              <div class="section-kicker">Component Ablation</div>
+              <h3>LOCA-Bench sensitivity to archive, dashboard, and recovery controls.</h3>
+            </div>
+          </div>
+          <div class="table-wrap compact-table">
+            <table class="result-table">
+              <thead>
+                <tr>
+                  <th scope="col">Variant</th>
+                  <th scope="col">Correct / 75</th>
+                  <th scope="col">Acc.</th>
+                  <th scope="col">Timeout</th>
+                  <th scope="col">Archive</th>
+                  <th scope="col">Recover / read</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="ours"><th scope="row">VISTA full</th><td>38</td><td class="best">50.7</td><td>20</td><td>69</td><td>105</td></tr>
+                <tr><th scope="row">w/o archive</th><td>27</td><td>36.0</td><td>41</td><td>0</td><td>4</td></tr>
+                <tr><th scope="row">w/o dashboard</th><td>28</td><td>37.3</td><td>5</td><td>255</td><td>57</td></tr>
+                <tr><th scope="row">w/o explicit recover</th><td>34</td><td>45.3</td><td>22</td><td>262</td><td>57</td></tr>
+                <tr><th scope="row">Fixed archive policy</th><td>33</td><td>44.0</td><td>12</td><td>-</td><td>162</td></tr>
+                <tr><th scope="row">Archive wording ablation</th><td>37</td><td>49.3</td><td>15</td><td>842</td><td>125</td></tr>
+                <tr><th scope="row">State-board variant</th><td>36</td><td>48.0</td><td>18</td><td>238</td><td>56</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
