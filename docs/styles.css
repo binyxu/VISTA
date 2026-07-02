@@ -269,7 +269,7 @@ h3 {
 .image-section img,
 .split-section img,
 .figure-grid img,
-.pdf-figure {
+.figure-image {
   display: block;
   width: 100%;
   border: 1px solid var(--line);
@@ -278,25 +278,11 @@ h3 {
   box-shadow: var(--shadow);
 }
 
-.pdf-figure {
-  overflow: hidden;
+.figure-image {
+  height: auto;
 }
 
-.pdf-figure.large {
-  height: min(72vw, 780px);
-  min-height: 520px;
-}
-
-.pdf-figure.medium {
-  height: min(46vw, 540px);
-  min-height: 360px;
-}
-
-.pdf-figure.small {
-  height: 390px;
-}
-
-.overview-section .pdf-figure {
+.overview-section .figure-image {
   margin-top: 24px;
 }
 
@@ -418,13 +404,6 @@ h3 {
   .figure-grid,
   .split-section {
     grid-template-columns: 1fr;
-  }
-
-  .pdf-figure.large,
-  .pdf-figure.medium,
-  .pdf-figure.small {
-    height: 420px;
-    min-height: 360px;
   }
 
   .context-block {

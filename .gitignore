@@ -22,6 +22,4 @@ tmp/
 *.fdb_latexmk
 *.fls
 *.pdf
-!assets/*.pdf
-!docs/assets/*.pdf
 *.zip
