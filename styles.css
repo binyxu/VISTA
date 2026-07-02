@@ -373,7 +373,7 @@ h3 {
 }
 
 .results-figures {
-  grid-template-columns: minmax(0, calc(55% - 9px)) minmax(0, calc(45% - 9px));
+  grid-template-columns: minmax(0, calc(62% - 9px)) minmax(0, calc(38% - 9px));
   align-items: stretch;
 }
 
