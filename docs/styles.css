@@ -118,7 +118,7 @@ p {
 h1 {
   max-width: 980px;
   margin-bottom: 18px;
-  font-size: 68px;
+  font-size: 54px;
   line-height: 1.02;
   letter-spacing: 0;
   overflow-wrap: break-word;
@@ -542,7 +542,7 @@ h3 {
   }
 
   h1 {
-    font-size: 38px;
+    font-size: 36px;
     line-height: 1.06;
     width: 100%;
     max-width: 9.4em;
@@ -615,6 +615,6 @@ h3 {
   h1 {
     width: calc(100vw - 44px);
     max-width: 346px;
-    font-size: 36px;
+    font-size: 34px;
   }
 }
