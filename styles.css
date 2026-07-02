@@ -154,8 +154,7 @@ h3 {
 }
 
 .affiliations,
-.author-notes,
-.author-emails {
+.author-notes {
   margin: 0;
   font-size: 14px;
   line-height: 1.45;
@@ -163,12 +162,6 @@ h3 {
 
 .author-notes {
   color: #64746e;
-}
-
-.author-emails {
-  color: #53635d;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  overflow-wrap: anywhere;
 }
 
 .button-row {
@@ -380,7 +373,7 @@ h3 {
 }
 
 .results-figures {
-  grid-template-columns: minmax(0, 0.55fr) minmax(0, 0.45fr);
+  grid-template-columns: minmax(0, calc(55% - 9px)) minmax(0, calc(45% - 9px));
   align-items: stretch;
 }
 
