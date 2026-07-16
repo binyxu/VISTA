@@ -1,6 +1,6 @@
 # VISTA: Self-Managed Context for Long-Horizon LLM Agents
 
-**LLM Agents Are Latent Context Managers: Eliciting Self-Managed Context via a Proprioceptive Dashboard**
+**LLM Agents Are Latent Context Managers: Eliciting Self-Managed Context via State Proprioception**
 
 [Paper](https://arxiv.org/abs/2606.30005) ·
 [Project Page](https://binyxu.github.io/VISTA/) ·
@@ -101,7 +101,7 @@ repository small. See [DATA.md](DATA.md) for:
 
 ```bibtex
 @article{xu2026vista,
-  title   = {LLM Agents Are Latent Context Managers: Eliciting Self-Managed Context via a Proprioceptive Dashboard},
+  title   = {LLM Agents Are Latent Context Managers: Eliciting Self-Managed Context via State Proprioception},
   author  = {Xu, Binyan and Li, Haitao and Zhang, Kehuan},
   journal = {arXiv preprint arXiv:2606.30005},
   year    = {2026}
