@@ -26,5 +26,9 @@ results/*
 skills/
 *_test/
 configs/
+!configs/
+!configs/loca_proxy_gemini3_flash.example.yaml
+!configs/method_configs/
+!configs/method_configs/self_managed_agentic.example.yaml
 skills/
 configs/qwen3-32B.yaml

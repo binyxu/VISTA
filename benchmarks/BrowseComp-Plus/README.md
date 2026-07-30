@@ -10,6 +10,13 @@ BrowseComp-Plus is a new benchmark to evaluate Deep-Research systems, isolating 
 
 BrowseComp-Plus enables fair, reproducible evaluations in the same retrieval setting, and allows us to systematically compare the effects of different retrievers paired with the same LLM agent.
 
+> **VISTA integration in this vendored benchmark.** The custom client at
+> `search_agent/gemini_vista_client.py` imports the reference workspace from
+> `../LOCAbench`; it does not maintain a separate VISTA core. See
+> [`docs/vista.md`](docs/vista.md) for setup and
+> [`../../docs/ARCHITECTURE.md`](../../docs/ARCHITECTURE.md) for the shared
+> method-to-code map.
+
 ---
 
 ## 🤗 Downloading the dataset

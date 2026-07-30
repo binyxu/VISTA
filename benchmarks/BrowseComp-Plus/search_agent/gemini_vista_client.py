@@ -56,7 +56,7 @@ def _locabench_root() -> Path:
     env = os.environ.get("LOCABENCH_ROOT", "").strip()
     if env:
         return Path(env).expanduser().resolve()
-    # Default: sibling of the BrowseComp-Plus repo, i.e. external/LOCAbench.
+    # Default: sibling of BrowseComp-Plus in the published benchmarks/ tree.
     repo_root = Path(__file__).resolve().parents[1]
     return (repo_root.parent / "LOCAbench").resolve()
 

@@ -65,7 +65,7 @@ Two processes need deps: the searcher (pyserini/Java) and the client
 (openai/fastmcp/tiktoken). The simplest path is the repo's `uv` env:
 
 ```bash
-cd external/BrowseComp-Plus
+cd benchmarks/BrowseComp-Plus
 uv venv --python 3.10
 source .venv/bin/activate
 # Full env (heavy; includes vllm for the judge):

@@ -21,6 +21,8 @@ Large payloads: archived/offloaded/blocked raw content is stored as external
 payload files and represented in context by compact index blocks.
 """
 
+from __future__ import annotations
+
 import json
 import os
 import re

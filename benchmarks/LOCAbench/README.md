@@ -10,6 +10,13 @@
 
 </div>
 
+> **VISTA integration in this vendored benchmark.** The upstream LOCA-Bench
+> environment is extended here with the VISTA reference runtime in
+> `gem/tools/mcp_server/context_workspace/`, the integration path in
+> `inference/run_react.py`, and the `run_strict_lc*.sh` launchers. Start with
+> [`../../docs/ARCHITECTURE.md`](../../docs/ARCHITECTURE.md) to separate the
+> VISTA method from upstream task and evaluator code.
+
 ## Overview
 
 **LOCA-bench** (a benchmark to assess Long-Context Abilities of Agents) is designed to evaluate language agents under extreme and controllable context growth scenarios. Given a task prompt, LOCA-bench leverages automated and scalable control of environment states to regulate the agent's context length.

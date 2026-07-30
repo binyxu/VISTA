@@ -1,0 +1,8 @@
+# Credentials and endpoint URLs are read from OPENAI_* or LOCA_OPENAI_*.
+provider: "custom"
+model: "gemini-3-flash"
+max_model_len: 1000000
+max_response_tokens: 32768
+max_tokens: 32768
+temperature: 0.0
+timeout: 600

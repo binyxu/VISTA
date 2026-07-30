@@ -1,0 +1,10 @@
+temperature: 0.0
+token_budget: 131072
+high_watermark: 0.8
+keep_recent_blocks: 8
+management_max_tokens: 32768
+max_management_rounds: 20
+
+# Deterministic safety pass before the agent-driven archive loop.
+preflight_target_ratio: 0.98
+preflight_turn_reserve_tokens: 0

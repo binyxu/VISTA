@@ -1,5 +1,5 @@
 # Core dependencies for AMA-Bench
-# Recommended Python: 3.9-3.11 (see pyproject.toml for version constraints)
+# Recommended Python: 3.10-3.11 (shared with the LOCA VISTA core)
 #
 # Installation:
 #   pip install -r requirements.txt
@@ -21,6 +21,7 @@ numpy>=1.24.0
 requests>=2.25.0
 httpx>=0.27.0
 aiohttp
+fastmcp>=2.0.0
 datasets>=2.18.0
 huggingface_hub>=0.22.0
 

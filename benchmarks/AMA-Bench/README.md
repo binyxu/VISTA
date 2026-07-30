@@ -7,6 +7,14 @@
 
 AMA-Bench is a benchmark for evaluating agent memory on long-horizon agent trajectories.
 
+> **VISTA integration in this vendored benchmark.** The paper-aligned adapter is
+> `src/method/self_managed_agentic.py`. It replays trajectories through the
+> reference workspace in `../LOCAbench`; the rest of this README documents the
+> upstream AMA-Bench harness. Run it from the VISTA root with
+> `bash run_ama_self_managed.sh`, and see
+> [`../../docs/ARCHITECTURE.md`](../../docs/ARCHITECTURE.md) for the boundary
+> between the VISTA method and benchmark code.
+
 ![AMA-Bench memory formulation](assets/memform.png)
 
 ## 📚 Category
@@ -59,8 +67,6 @@ All methods share a unified two-stage interface defined in [src/method/base_meth
 - `memory_retrieve(memory, question)` — retrieve relevant context for a question
 
 ## 🧠 Memory Architecture (Two-Stage)
-
-![Two-stage memory architecture](assets/mem_two_stage.png)
 
 Each memory method is implemented in two stages:
 

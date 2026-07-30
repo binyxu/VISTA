@@ -14,6 +14,8 @@ Tools:
   context_workspace_archive    - replace one or more blocks with compact indexes
 """
 
+from __future__ import annotations
+
 import json
 import logging
 import os

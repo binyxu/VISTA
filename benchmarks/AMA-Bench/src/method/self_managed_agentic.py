@@ -41,13 +41,19 @@ from src.method.base_method import BaseMethod
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 LOCA_WORKSPACE_DIR = (
     PROJECT_ROOT
-    / "external"
-    / "LOCA-bench"
+    / "benchmarks"
+    / "LOCAbench"
     / "gem"
     / "tools"
     / "mcp_server"
     / "context_workspace"
 )
+if not LOCA_WORKSPACE_DIR.is_dir():
+    raise ImportError(
+        "VISTA's LOCA context-workspace core was not found at "
+        f"{LOCA_WORKSPACE_DIR}. Run this adapter from the published VISTA "
+        "repository layout or set up the benchmark tree first."
+    )
 if str(LOCA_WORKSPACE_DIR) not in sys.path:
     sys.path.insert(0, str(LOCA_WORKSPACE_DIR))
 
@@ -390,7 +396,14 @@ class SelfManagedAgenticMethod(BaseMethod):
             if manager.public_payload_dir:
                 os.environ["CONTEXT_WORKSPACE_PAYLOAD_DIR"] = str(manager.public_payload_dir.resolve())
             try:
-                result = context_workspace_archive(target_ids, index=index, extract=extract)
+                # The reference LOCA tool calls this field ``replacement``.
+                # AMA's replay policy historically emitted an ``index`` plus an
+                # optional verbatim ``extract``; keep both in the compact handle
+                # while the complete source block remains in the exact payload.
+                replacement = index.strip()
+                if extract.strip():
+                    replacement = f"{replacement}\nCritical extract: {extract.strip()}"
+                result = context_workspace_archive(target_ids, replacement=replacement)
             finally:
                 if old_workspace is None:
                     os.environ.pop("CONTEXT_WORKSPACE_DIR", None)

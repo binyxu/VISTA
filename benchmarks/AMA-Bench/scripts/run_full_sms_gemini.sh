@@ -4,10 +4,10 @@ set -euo pipefail
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_DIR"
 
-if [ -f "../LOCA-bench/.env" ]; then
+if [ -f "../LOCAbench/.env" ]; then
   set -a
   # shellcheck disable=SC1091
-  . "../LOCA-bench/.env"
+  . "../LOCAbench/.env"
   set +a
 fi
 
@@ -15,9 +15,9 @@ RUN_ID="${RUN_ID:-sms_full_$(date +%Y%m%d_%H%M%S)}"
 LOG_DIR="${LOG_DIR:-logs/${RUN_ID}}"
 mkdir -p "$LOG_DIR"
 
-LLM_CONFIG="${LLM_CONFIG:-configs/loca_proxy_gemini3_flash.yaml}"
+LLM_CONFIG="${LLM_CONFIG:-configs/loca_proxy_gemini3_flash.example.yaml}"
 JUDGE_CONFIG="${JUDGE_CONFIG:-$LLM_CONFIG}"
-METHOD_CONFIG="${METHOD_CONFIG:-configs/method_configs/self_managed_agentic.yaml}"
+METHOD_CONFIG="${METHOD_CONFIG:-configs/method_configs/self_managed_agentic.example.yaml}"
 OUTPUT_DIR="${OUTPUT_DIR:-../../results/ama_full_sms_gemini}"
 TEST_FILE="${TEST_FILE:-dataset/test/open_end_qa_set.jsonl}"
 
